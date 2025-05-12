@@ -14,17 +14,17 @@ Run DataDriven And Pass If One Test Passes
 
     ${stdout}=     Get File    robot_out.txt
     ${stderr}=     Get File    robot_err.txt
-    Log    ⏱ STDOUT:\n${stdout}
-    Log    ⚠️ STDERR:\n${stderr}
+    Log    STDOUT:\n${stdout}
+    Log    STDERR:\n${stderr}
 
     File Should Exist    ${RESULT FILE}
     ${xml}=        Get File    ${RESULT FILE}
     ${before}=     Get Length    ${xml}
-    ${replaced}=   Replace String    ${xml}    status="PASS"    ✅
+    ${replaced}=   Replace String    ${xml}    status="PASS"    PASS_FOUND
     ${after}=      Get Length    ${replaced}
     ${match_len}=  Get Length    status="PASS"
     ${count}=      Evaluate    (${before} - ${after}) // ${match_len}
 
-    Log    ✅ Number of passed tests: ${count}
-    Run Keyword If    ${count} > 0    Log    ✅ At least one test passed
-    Run Keyword If    ${count} == 0    Fail    ❌ No test passed
+    Log    Number of passed tests: ${count}
+    Run Keyword If    ${count} > 0    Log    At least one test passed
+    Run Keyword If    ${count} == 0    Fail    No test passed

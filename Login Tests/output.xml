@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2 (Python 3.12.8 on win32)" generated="2025-05-12T12:29:41.730617" rpa="false" schemaversion="5">
+<robot generator="Robot 7.2 (Python 3.12.8 on win32)" generated="2025-05-12T13:30:08.250713" rpa="false" schemaversion="5">
 <suite id="s1" name="Main" source="C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\Main.robot">
 <test id="s1-t1" name="Run DataDriven And Pass If One Test Passes" line="11">
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-05-12T12:29:41.769702" level="INFO">${command} = robot --output datadriven_output.xml DataDriven.robot</msg>
+<msg time="2025-05-12T13:30:08.320207" level="INFO">${command} = robot --output datadriven_output.xml DataDriven.robot</msg>
 <var>${command}</var>
 <arg>robot --output ${RESULT FILE} DataDriven.robot</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-05-12T12:29:41.768695" elapsed="0.001007"/>
+<status status="PASS" start="2025-05-12T13:30:08.320207" elapsed="0.001008"/>
 </kw>
 <kw name="Run Process" owner="Process">
-<msg time="2025-05-12T12:29:41.773003" level="INFO">Starting process:
+<msg time="2025-05-12T13:30:08.325227" level="INFO">Starting process:
 robot --output datadriven_output.xml DataDriven.robot</msg>
-<msg time="2025-05-12T12:29:41.798155" level="INFO">Waiting for process to complete.</msg>
-<msg time="2025-05-12T12:30:09.544335" level="INFO">Process completed.</msg>
-<msg time="2025-05-12T12:30:09.544335" level="INFO">${result} = &lt;result object with rc 29&gt;</msg>
+<msg time="2025-05-12T13:30:08.371338" level="INFO">Waiting for process to complete.</msg>
+<msg time="2025-05-12T13:30:37.221729" level="INFO">Process completed.</msg>
+<msg time="2025-05-12T13:30:37.221729" level="INFO">${result} = &lt;result object with rc 29&gt;</msg>
 <var>${result}</var>
 <arg>${command}</arg>
 <arg>shell=True</arg>
@@ -22,28 +22,28 @@ robot --output datadriven_output.xml DataDriven.robot</msg>
 <arg>stdout=robot_out.txt</arg>
 <arg>stderr=robot_err.txt</arg>
 <doc>Runs a process and waits for it to complete.</doc>
-<status status="PASS" start="2025-05-12T12:29:41.769702" elapsed="27.774633"/>
+<status status="PASS" start="2025-05-12T13:30:08.321215" elapsed="28.900514"/>
 </kw>
 <kw name="Get File" owner="OperatingSystem">
-<msg time="2025-05-12T12:30:09.544335" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\robot_out.txt"&gt;C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\robot_out.txt&lt;/a&gt;'.</msg>
-<msg time="2025-05-12T12:30:09.545339" level="INFO">${stdout} = ==============================================================================
+<msg time="2025-05-12T13:30:37.222729" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\robot_out.txt"&gt;C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\robot_out.txt&lt;/a&gt;'.</msg>
+<msg time="2025-05-12T13:30:37.222729" level="INFO">${stdout} = ==============================================================================
 DataDriven                                                                    
 ==========================================...</msg>
 <var>${stdout}</var>
 <arg>robot_out.txt</arg>
 <doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2025-05-12T12:30:09.544335" elapsed="0.001004"/>
+<status status="PASS" start="2025-05-12T13:30:37.221729" elapsed="0.001000"/>
 </kw>
 <kw name="Get File" owner="OperatingSystem">
-<msg time="2025-05-12T12:30:09.545339" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\robot_err.txt"&gt;C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\robot_err.txt&lt;/a&gt;'.</msg>
-<msg time="2025-05-12T12:30:09.545339" level="INFO">${stderr} = </msg>
+<msg time="2025-05-12T13:30:37.222729" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\robot_err.txt"&gt;C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\robot_err.txt&lt;/a&gt;'.</msg>
+<msg time="2025-05-12T13:30:37.223728" level="INFO">${stderr} = </msg>
 <var>${stderr}</var>
 <arg>robot_err.txt</arg>
 <doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2025-05-12T12:30:09.545339" elapsed="0.000000"/>
+<status status="PASS" start="2025-05-12T13:30:37.222729" elapsed="0.000999"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T12:30:09.546336" level="INFO">⏱ STDOUT:
+<msg time="2025-05-12T13:30:37.223728" level="INFO">STDOUT:
 ==============================================================================
 DataDriven                                                                    
 ==============================================================================
@@ -144,104 +144,104 @@ Output:  C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\datadriven_output.
 Log:     C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\log.html
 Report:  C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\report.html
 </msg>
-<arg>⏱ STDOUT:\n${stdout}</arg>
+<arg>STDOUT:\n${stdout}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T12:30:09.546336" elapsed="0.000000"/>
+<status status="PASS" start="2025-05-12T13:30:37.223728" elapsed="0.001000"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T12:30:09.547337" level="INFO">⚠️ STDERR:
+<msg time="2025-05-12T13:30:37.224728" level="INFO">STDERR:
 </msg>
-<arg>⚠️ STDERR:\n${stderr}</arg>
+<arg>STDERR:\n${stderr}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T12:30:09.546336" elapsed="0.001001"/>
+<status status="PASS" start="2025-05-12T13:30:37.224728" elapsed="0.000000"/>
 </kw>
 <kw name="File Should Exist" owner="OperatingSystem">
-<msg time="2025-05-12T12:30:09.547337" level="INFO" html="true">File '&lt;a href="file://C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\datadriven_output.xml"&gt;C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\datadriven_output.xml&lt;/a&gt;' exists.</msg>
+<msg time="2025-05-12T13:30:37.225728" level="INFO" html="true">File '&lt;a href="file://C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\datadriven_output.xml"&gt;C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\datadriven_output.xml&lt;/a&gt;' exists.</msg>
 <arg>${RESULT FILE}</arg>
 <doc>Fails unless the given ``path`` points to an existing file.</doc>
-<status status="PASS" start="2025-05-12T12:30:09.547337" elapsed="0.000000"/>
+<status status="PASS" start="2025-05-12T13:30:37.225728" elapsed="0.000000"/>
 </kw>
 <kw name="Get File" owner="OperatingSystem">
-<msg time="2025-05-12T12:30:09.547337" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\datadriven_output.xml"&gt;C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\datadriven_output.xml&lt;/a&gt;'.</msg>
-<msg time="2025-05-12T12:30:09.548338" level="INFO">${xml} = &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;robot generator="Robot 7.2 (Python 3.12.8 on win32)" generated="2025-05-12T12:29:42.463700" rpa="false" schemaversion="5"&gt;
+<msg time="2025-05-12T13:30:37.225728" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\datadriven_output.xml"&gt;C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\datadriven_output.xml&lt;/a&gt;'.</msg>
+<msg time="2025-05-12T13:30:37.226729" level="INFO">${xml} = &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;robot generator="Robot 7.2 (Python 3.12.8 on win32)" generated="2025-05-12T13:30:09.239920" rpa="false" schemaversion="5"&gt;
 &lt;suite id="s1" name="DataDriven" sour...</msg>
 <var>${xml}</var>
 <arg>${RESULT FILE}</arg>
 <doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2025-05-12T12:30:09.547337" elapsed="0.001001"/>
+<status status="PASS" start="2025-05-12T13:30:37.225728" elapsed="0.001001"/>
 </kw>
 <kw name="Get Length" owner="BuiltIn">
-<msg time="2025-05-12T12:30:09.548338" level="INFO">Length is 146983.</msg>
-<msg time="2025-05-12T12:30:09.548338" level="INFO">${before} = 146983</msg>
+<msg time="2025-05-12T13:30:37.227729" level="INFO">Length is 146985.</msg>
+<msg time="2025-05-12T13:30:37.227729" level="INFO">${before} = 146985</msg>
 <var>${before}</var>
 <arg>${xml}</arg>
 <doc>Returns and logs the length of the given item as an integer.</doc>
-<status status="PASS" start="2025-05-12T12:30:09.548338" elapsed="0.000000"/>
+<status status="PASS" start="2025-05-12T13:30:37.226729" elapsed="0.001000"/>
 </kw>
 <kw name="Replace String" owner="String">
-<msg time="2025-05-12T12:30:09.549334" level="INFO">${replaced} = &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;robot generator="Robot 7.2 (Python 3.12.8 on win32)" generated="2025-05-12T12:29:42.463700" rpa="false" schemaversion="5"&gt;
+<msg time="2025-05-12T13:30:37.227729" level="INFO">${replaced} = &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;robot generator="Robot 7.2 (Python 3.12.8 on win32)" generated="2025-05-12T13:30:09.239920" rpa="false" schemaversion="5"&gt;
 &lt;suite id="s1" name="DataDriven" sour...</msg>
 <var>${replaced}</var>
 <arg>${xml}</arg>
 <arg>status="PASS"</arg>
-<arg>✅</arg>
+<arg>PASS_FOUND</arg>
 <doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
-<status status="PASS" start="2025-05-12T12:30:09.549334" elapsed="0.000000"/>
+<status status="PASS" start="2025-05-12T13:30:37.227729" elapsed="0.000000"/>
 </kw>
 <kw name="Get Length" owner="BuiltIn">
-<msg time="2025-05-12T12:30:09.550332" level="INFO">Length is 144811.</msg>
-<msg time="2025-05-12T12:30:09.550332" level="INFO">${after} = 144811</msg>
+<msg time="2025-05-12T13:30:37.228727" level="INFO">Length is 146442.</msg>
+<msg time="2025-05-12T13:30:37.228727" level="INFO">${after} = 146442</msg>
 <var>${after}</var>
 <arg>${replaced}</arg>
 <doc>Returns and logs the length of the given item as an integer.</doc>
-<status status="PASS" start="2025-05-12T12:30:09.550332" elapsed="0.000000"/>
+<status status="PASS" start="2025-05-12T13:30:37.228727" elapsed="0.000000"/>
 </kw>
 <kw name="Get Length" owner="BuiltIn">
-<msg time="2025-05-12T12:30:09.550332" level="INFO">Length is 13.</msg>
-<msg time="2025-05-12T12:30:09.550332" level="INFO">${match_len} = 13</msg>
+<msg time="2025-05-12T13:30:37.228727" level="INFO">Length is 13.</msg>
+<msg time="2025-05-12T13:30:37.228727" level="INFO">${match_len} = 13</msg>
 <var>${match_len}</var>
 <arg>status="PASS"</arg>
 <doc>Returns and logs the length of the given item as an integer.</doc>
-<status status="PASS" start="2025-05-12T12:30:09.550332" elapsed="0.000000"/>
+<status status="PASS" start="2025-05-12T13:30:37.228727" elapsed="0.000000"/>
 </kw>
 <kw name="Evaluate" owner="BuiltIn">
-<msg time="2025-05-12T12:30:09.550332" level="INFO">${count} = 167</msg>
+<msg time="2025-05-12T13:30:37.230082" level="INFO">${count} = 41</msg>
 <var>${count}</var>
 <arg>(${before} - ${after}) // ${match_len}</arg>
 <doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-05-12T12:30:09.550332" elapsed="0.000000"/>
+<status status="PASS" start="2025-05-12T13:30:37.229737" elapsed="0.000345"/>
 </kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T12:30:09.550332" level="INFO">✅ Number of passed tests: 167</msg>
-<arg>✅ Number of passed tests: ${count}</arg>
+<msg time="2025-05-12T13:30:37.230082" level="INFO">Number of passed tests: 41</msg>
+<arg>Number of passed tests: ${count}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T12:30:09.550332" elapsed="0.000000"/>
+<status status="PASS" start="2025-05-12T13:30:37.230082" elapsed="0.000000"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-12T12:30:09.551333" level="INFO">✅ At least one test passed</msg>
-<arg>✅ At least one test passed</arg>
+<msg time="2025-05-12T13:30:37.231084" level="INFO">At least one test passed</msg>
+<arg>At least one test passed</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-12T12:30:09.551333" elapsed="0.000000"/>
+<status status="PASS" start="2025-05-12T13:30:37.231084" elapsed="0.000000"/>
 </kw>
 <arg>${count} &gt; 0</arg>
 <arg>Log</arg>
-<arg>✅ At least one test passed</arg>
+<arg>At least one test passed</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-05-12T12:30:09.551333" elapsed="0.000000"/>
+<status status="PASS" start="2025-05-12T13:30:37.230082" elapsed="0.001002"/>
 </kw>
 <kw name="Run Keyword If" owner="BuiltIn">
 <arg>${count} == 0</arg>
 <arg>Fail</arg>
-<arg>❌ No test passed</arg>
+<arg>No test passed</arg>
 <doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
-<status status="PASS" start="2025-05-12T12:30:09.551333" elapsed="0.000000"/>
+<status status="PASS" start="2025-05-12T13:30:37.231084" elapsed="0.000000"/>
 </kw>
-<status status="PASS" start="2025-05-12T12:29:41.768695" elapsed="27.782638"/>
+<status status="PASS" start="2025-05-12T13:30:08.319811" elapsed="28.911273"/>
 </test>
-<status status="PASS" start="2025-05-12T12:29:41.733617" elapsed="27.818716"/>
+<status status="PASS" start="2025-05-12T13:30:08.253718" elapsed="28.978370"/>
 </suite>
 <statistics>
 <total>
