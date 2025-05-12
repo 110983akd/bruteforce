@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2 (Python 3.12.8 on win32)" generated="2025-05-12T12:29:41.730617" rpa="false" schemaversion="5">
+<suite id="s1" name="Main" source="C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\Main.robot">
+<test id="s1-t1" name="Run DataDriven And Pass If One Test Passes" line="11">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-05-12T12:29:41.769702" level="INFO">${command} = robot --output datadriven_output.xml DataDriven.robot</msg>
+<var>${command}</var>
+<arg>robot --output ${RESULT FILE} DataDriven.robot</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-05-12T12:29:41.768695" elapsed="0.001007"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2025-05-12T12:29:41.773003" level="INFO">Starting process:
+robot --output datadriven_output.xml DataDriven.robot</msg>
+<msg time="2025-05-12T12:29:41.798155" level="INFO">Waiting for process to complete.</msg>
+<msg time="2025-05-12T12:30:09.544335" level="INFO">Process completed.</msg>
+<msg time="2025-05-12T12:30:09.544335" level="INFO">${result} = &lt;result object with rc 29&gt;</msg>
+<var>${result}</var>
+<arg>${command}</arg>
+<arg>shell=True</arg>
+<arg>cwd=C:\\Users\\bjornol\\Testudo_code\\bruteforce\\Login Tests</arg>
+<arg>stdout=robot_out.txt</arg>
+<arg>stderr=robot_err.txt</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2025-05-12T12:29:41.769702" elapsed="27.774633"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2025-05-12T12:30:09.544335" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\robot_out.txt"&gt;C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\robot_out.txt&lt;/a&gt;'.</msg>
+<msg time="2025-05-12T12:30:09.545339" level="INFO">${stdout} = ==============================================================================
+DataDriven                                                                    
+==========================================...</msg>
+<var>${stdout}</var>
+<arg>robot_out.txt</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2025-05-12T12:30:09.544335" elapsed="0.001004"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2025-05-12T12:30:09.545339" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\robot_err.txt"&gt;C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\robot_err.txt&lt;/a&gt;'.</msg>
+<msg time="2025-05-12T12:30:09.545339" level="INFO">${stderr} = </msg>
+<var>${stderr}</var>
+<arg>robot_err.txt</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2025-05-12T12:30:09.545339" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-12T12:30:09.546336" level="INFO">⏱ STDOUT:
+==============================================================================
+DataDriven                                                                    
+==============================================================================
+Login with user 'admin' and password 'id'                             | FAIL |
+Login failed for user 'admin' with password 'id': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'action'                         | FAIL |
+Login failed for user 'admin' with password 'action': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'page'                           | FAIL |
+Login failed for user 'admin' with password 'page': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'name'                           | FAIL |
+Login failed for user 'admin' with password 'name': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'password'                       | FAIL |
+Login failed for user 'admin' with password 'password': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'url'                            | FAIL |
+Login failed for user 'admin' with password 'url': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'email'                          | FAIL |
+Login failed for user 'admin' with password 'email': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'type'                           | FAIL |
+Login failed for user 'admin' with password 'type': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'username'                       | FAIL |
+Login failed for user 'admin' with password 'username': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'file'                           | FAIL |
+Login failed for user 'admin' with password 'file': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'title'                          | FAIL |
+Login failed for user 'admin' with password 'title': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'code'                           | FAIL |
+Login failed for user 'admin' with password 'code': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'q'                              | FAIL |
+Login failed for user 'admin' with password 'q': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'submit'                         | FAIL |
+Login failed for user 'admin' with password 'submit': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'user'                           | FAIL |
+Login failed for user 'admin' with password 'user': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'token'                          | FAIL |
+Login failed for user 'admin' with password 'token': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'delete'                         | FAIL |
+Login failed for user 'admin' with password 'delete': Login != Dashboard
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'secret'                         Login successful with username: admin and password: secret
+| PASS |
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'message'                        | FAIL |
+SKIPPED: Login already succeeded with previous credentials
+------------------------------------------------------------------------------
+Login with user 'admin' and password 't'                              | FAIL |
+SKIPPED: Login already succeeded with previous credentials
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'c'                              | FAIL |
+SKIPPED: Login already succeeded with previous credentials
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'data'                           | FAIL |
+SKIPPED: Login already succeeded with previous credentials
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'mode'                           | FAIL |
+SKIPPED: Login already succeeded with previous credentials
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'order'                          | FAIL |
+SKIPPED: Login already succeeded with previous credentials
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'lang'                           | FAIL |
+SKIPPED: Login already succeeded with previous credentials
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'p'                              | FAIL |
+SKIPPED: Login already succeeded with previous credentials
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'key'                            | FAIL |
+SKIPPED: Login already succeeded with previous credentials
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'status'                         | FAIL |
+SKIPPED: Login already succeeded with previous credentials
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'start'                          | FAIL |
+SKIPPED: Login already succeeded with previous credentials
+------------------------------------------------------------------------------
+Login with user 'admin' and password 'charset'                        | FAIL |
+SKIPPED: Login already succeeded with previous credentials
+------------------------------------------------------------------------------
+DataDriven                                                            | FAIL |
+30 tests, 1 passed, 29 failed
+==============================================================================
+Output:  C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\datadriven_output.xml
+Log:     C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\log.html
+Report:  C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\report.html
+</msg>
+<arg>⏱ STDOUT:\n${stdout}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-12T12:30:09.546336" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-12T12:30:09.547337" level="INFO">⚠️ STDERR:
+</msg>
+<arg>⚠️ STDERR:\n${stderr}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-12T12:30:09.546336" elapsed="0.001001"/>
+</kw>
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2025-05-12T12:30:09.547337" level="INFO" html="true">File '&lt;a href="file://C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\datadriven_output.xml"&gt;C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\datadriven_output.xml&lt;/a&gt;' exists.</msg>
+<arg>${RESULT FILE}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2025-05-12T12:30:09.547337" elapsed="0.000000"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2025-05-12T12:30:09.547337" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\datadriven_output.xml"&gt;C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\datadriven_output.xml&lt;/a&gt;'.</msg>
+<msg time="2025-05-12T12:30:09.548338" level="INFO">${xml} = &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;robot generator="Robot 7.2 (Python 3.12.8 on win32)" generated="2025-05-12T12:29:42.463700" rpa="false" schemaversion="5"&gt;
+&lt;suite id="s1" name="DataDriven" sour...</msg>
+<var>${xml}</var>
+<arg>${RESULT FILE}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2025-05-12T12:30:09.547337" elapsed="0.001001"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-12T12:30:09.548338" level="INFO">Length is 146983.</msg>
+<msg time="2025-05-12T12:30:09.548338" level="INFO">${before} = 146983</msg>
+<var>${before}</var>
+<arg>${xml}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-12T12:30:09.548338" elapsed="0.000000"/>
+</kw>
+<kw name="Replace String" owner="String">
+<msg time="2025-05-12T12:30:09.549334" level="INFO">${replaced} = &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;robot generator="Robot 7.2 (Python 3.12.8 on win32)" generated="2025-05-12T12:29:42.463700" rpa="false" schemaversion="5"&gt;
+&lt;suite id="s1" name="DataDriven" sour...</msg>
+<var>${replaced}</var>
+<arg>${xml}</arg>
+<arg>status="PASS"</arg>
+<arg>✅</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2025-05-12T12:30:09.549334" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-12T12:30:09.550332" level="INFO">Length is 144811.</msg>
+<msg time="2025-05-12T12:30:09.550332" level="INFO">${after} = 144811</msg>
+<var>${after}</var>
+<arg>${replaced}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-12T12:30:09.550332" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-12T12:30:09.550332" level="INFO">Length is 13.</msg>
+<msg time="2025-05-12T12:30:09.550332" level="INFO">${match_len} = 13</msg>
+<var>${match_len}</var>
+<arg>status="PASS"</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-12T12:30:09.550332" elapsed="0.000000"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-05-12T12:30:09.550332" level="INFO">${count} = 167</msg>
+<var>${count}</var>
+<arg>(${before} - ${after}) // ${match_len}</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-05-12T12:30:09.550332" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-12T12:30:09.550332" level="INFO">✅ Number of passed tests: 167</msg>
+<arg>✅ Number of passed tests: ${count}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-12T12:30:09.550332" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-12T12:30:09.551333" level="INFO">✅ At least one test passed</msg>
+<arg>✅ At least one test passed</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-12T12:30:09.551333" elapsed="0.000000"/>
+</kw>
+<arg>${count} &gt; 0</arg>
+<arg>Log</arg>
+<arg>✅ At least one test passed</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:30:09.551333" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${count} == 0</arg>
+<arg>Fail</arg>
+<arg>❌ No test passed</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:30:09.551333" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:29:41.768695" elapsed="27.782638"/>
+</test>
+<status status="PASS" start="2025-05-12T12:29:41.733617" elapsed="27.818716"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Main" id="s1" pass="1" fail="0" skip="0">Main</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

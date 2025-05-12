@@ -1,0 +1,2795 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2 (Python 3.12.8 on win32)" generated="2025-05-12T12:29:42.463700" rpa="false" schemaversion="5">
+<suite id="s1" name="DataDriven" source="C:\Users\bjornol\Testudo_code\bruteforce\Login Tests\DataDriven.robot">
+<kw name="Open my Browser" owner="login_resources" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:42.926299" level="INFO">Opening browser 'firefox' to base url 'http://127.0.0.1:5000'.</msg>
+<arg>${LOGIN URL}</arg>
+<arg>browser=${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:42.926299" elapsed="9.084859"/>
+</kw>
+<kw name="Set Window Position" owner="SeleniumLibrary">
+<arg>0</arg>
+<arg>0</arg>
+<doc>Sets window position using ``x`` and ``y`` coordinates.</doc>
+<status status="PASS" start="2025-05-12T12:29:52.012157" elapsed="0.035398"/>
+</kw>
+<kw name="Set Window Size" owner="SeleniumLibrary">
+<arg>960</arg>
+<arg>1000</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" start="2025-05-12T12:29:52.047555" elapsed="0.043572"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:29:42.925298" elapsed="9.165829"/>
+</kw>
+<test id="s1-t1" name="Login with user 'admin' and password 'id'" line="12">
+<msg time="2025-05-12T12:29:52.095122" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'id'", 'arguments': {'${username}': 'admin', '${password}': 'id'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:52.098126" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:52.097118" elapsed="0.109089"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:29:52.097118" elapsed="0.109089"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:29:52.206207" elapsed="0.000000"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:52.206207" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:52.206207" elapsed="0.146974"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:52.354196" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:52.353181" elapsed="0.226689"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:52.579870" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:29:52.793688" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:52.579870" elapsed="0.323668"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:52.903538" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:52.903538" elapsed="0.308523"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:53.224061" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:29:53.212061" elapsed="0.012000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:53.225060" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:53.226061" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:53.226061" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:29:53.224061" elapsed="0.002000"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:29:53.228060" level="FAIL">Login failed for user 'admin' with password 'id': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:29:53.227060" elapsed="0.001000">Login failed for user 'admin' with password 'id': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:53.227060" elapsed="0.002000">Login failed for user 'admin' with password 'id': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:29:53.224061" elapsed="0.004999">Login failed for user 'admin' with password 'id': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=id</arg>
+<status status="FAIL" start="2025-05-12T12:29:52.206207" elapsed="1.022853">Login failed for user 'admin' with password 'id': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:52.092116" elapsed="1.137944">Login failed for user 'admin' with password 'id': Login != Dashboard</status>
+</test>
+<test id="s1-t2" name="Login with user 'admin' and password 'action'" line="12">
+<msg time="2025-05-12T12:29:53.243061" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'action'", 'arguments': {'${username}': 'admin', '${password}': 'action'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:53.244065" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:53.244065" elapsed="0.242239"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:29:53.243061" elapsed="0.243243"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:29:53.486304" elapsed="0.000000"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:53.486304" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:53.486304" elapsed="0.156139"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:53.642443" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:53.642443" elapsed="0.111832"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:53.754275" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:29:53.786047" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:53.754275" elapsed="0.062978"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:53.817253" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:53.817253" elapsed="0.173943"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:53.995195" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:29:53.992197" elapsed="0.002998"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:53.996194" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:53.996194" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:53.996194" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:29:53.995195" elapsed="0.000999"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:29:53.998195" level="FAIL">Login failed for user 'admin' with password 'action': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:29:53.997194" elapsed="0.001001">Login failed for user 'admin' with password 'action': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:53.996194" elapsed="0.017003">Login failed for user 'admin' with password 'action': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:29:53.995195" elapsed="0.018002">Login failed for user 'admin' with password 'action': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=action</arg>
+<status status="FAIL" start="2025-05-12T12:29:53.486304" elapsed="0.526893">Login failed for user 'admin' with password 'action': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:53.241062" elapsed="0.772135">Login failed for user 'admin' with password 'action': Login != Dashboard</status>
+</test>
+<test id="s1-t3" name="Login with user 'admin' and password 'page'" line="12">
+<msg time="2025-05-12T12:29:54.017212" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'page'", 'arguments': {'${username}': 'admin', '${password}': 'page'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:54.019200" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:54.018201" elapsed="0.289783"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:29:54.017212" elapsed="0.291771"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:29:54.309983" elapsed="0.000000"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:54.310984" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:54.310984" elapsed="0.164175"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:54.476160" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:54.476160" elapsed="0.103770"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:54.579930" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:29:54.595957" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:54.579930" elapsed="0.062922"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:54.642852" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:54.642852" elapsed="0.126407"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:54.769259" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:29:54.769259" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:54.769259" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:54.769259" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:54.769259" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:29:54.769259" elapsed="0.000000"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:29:54.769259" level="FAIL">Login failed for user 'admin' with password 'page': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:29:54.769259" elapsed="0.000000">Login failed for user 'admin' with password 'page': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:54.769259" elapsed="0.000000">Login failed for user 'admin' with password 'page': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:29:54.769259" elapsed="0.000000">Login failed for user 'admin' with password 'page': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=page</arg>
+<status status="FAIL" start="2025-05-12T12:29:54.308983" elapsed="0.460276">Login failed for user 'admin' with password 'page': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:54.014198" elapsed="0.755061">Login failed for user 'admin' with password 'page': Login != Dashboard</status>
+</test>
+<test id="s1-t4" name="Login with user 'admin' and password 'name'" line="12">
+<msg time="2025-05-12T12:29:54.769259" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'name'", 'arguments': {'${username}': 'admin', '${password}': 'name'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:54.784937" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:54.784937" elapsed="0.157835"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:29:54.769259" elapsed="0.173513"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:29:54.942772" elapsed="0.000000"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:54.942772" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:54.942772" elapsed="0.313903"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:55.257677" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:55.257677" elapsed="0.167836"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:55.425513" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:29:55.474074" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:55.425513" elapsed="0.104881"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:55.530394" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:55.530394" elapsed="0.266419"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:55.807814" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:29:55.796813" elapsed="0.011001"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:55.808814" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:55.809816" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:55.809816" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:29:55.807814" elapsed="0.002002"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:29:55.811813" level="FAIL">Login failed for user 'admin' with password 'name': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:29:55.810811" elapsed="0.001002">Login failed for user 'admin' with password 'name': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:55.810811" elapsed="0.001002">Login failed for user 'admin' with password 'name': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:29:55.807814" elapsed="0.003999">Login failed for user 'admin' with password 'name': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=name</arg>
+<status status="FAIL" start="2025-05-12T12:29:54.942772" elapsed="0.869041">Login failed for user 'admin' with password 'name': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:54.769259" elapsed="1.042554">Login failed for user 'admin' with password 'name': Login != Dashboard</status>
+</test>
+<test id="s1-t5" name="Login with user 'admin' and password 'password'" line="12">
+<msg time="2025-05-12T12:29:55.814810" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'password'", 'arguments': {'${username}': 'admin', '${password}': 'password'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:55.816813" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:55.815812" elapsed="0.080111"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:29:55.814810" elapsed="0.081113"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:29:55.896923" elapsed="0.001001"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:55.897924" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:55.897924" elapsed="0.166678"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:56.080232" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:56.080232" elapsed="0.115359"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:56.195591" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:29:56.274473" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:56.195591" elapsed="0.130514"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:56.327106" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:56.326105" elapsed="0.183332"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:56.519722" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:29:56.509437" elapsed="0.010285"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:56.519722" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:56.519722" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:56.519722" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:29:56.519722" elapsed="0.000000"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:29:56.519722" level="FAIL">Login failed for user 'admin' with password 'password': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:29:56.519722" elapsed="0.000000">Login failed for user 'admin' with password 'password': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:56.519722" elapsed="0.000000">Login failed for user 'admin' with password 'password': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:29:56.519722" elapsed="0.000000">Login failed for user 'admin' with password 'password': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=password</arg>
+<status status="FAIL" start="2025-05-12T12:29:55.896923" elapsed="0.622799">Login failed for user 'admin' with password 'password': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:55.812812" elapsed="0.706910">Login failed for user 'admin' with password 'password': Login != Dashboard</status>
+</test>
+<test id="s1-t6" name="Login with user 'admin' and password 'url'" line="12">
+<msg time="2025-05-12T12:29:56.535204" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'url'", 'arguments': {'${username}': 'admin', '${password}': 'url'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:56.539202" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:56.537202" elapsed="0.203059"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:29:56.536221" elapsed="0.204040"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:29:56.741264" elapsed="0.000998"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:56.742262" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:56.742262" elapsed="0.073076"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:56.816339" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:56.816339" elapsed="0.098477"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:56.915816" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:29:56.938818" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:56.915816" elapsed="0.040693"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:56.956509" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:56.956509" elapsed="0.121757"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:57.083944" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.079265" elapsed="0.005691"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:57.084956" elapsed="0.001002"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:57.085958" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:57.085958" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:29:57.084956" elapsed="0.001002"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:29:57.086954" level="FAIL">Login failed for user 'admin' with password 'url': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:29:57.085958" elapsed="0.000996">Login failed for user 'admin' with password 'url': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:57.085958" elapsed="0.000996">Login failed for user 'admin' with password 'url': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:29:57.084956" elapsed="0.001998">Login failed for user 'admin' with password 'url': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=url</arg>
+<status status="FAIL" start="2025-05-12T12:29:56.741264" elapsed="0.345690">Login failed for user 'admin' with password 'url': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:56.519722" elapsed="0.568235">Login failed for user 'admin' with password 'url': Login != Dashboard</status>
+</test>
+<test id="s1-t7" name="Login with user 'admin' and password 'email'" line="12">
+<msg time="2025-05-12T12:29:57.089956" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'email'", 'arguments': {'${username}': 'admin', '${password}': 'email'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:57.091481" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.090466" elapsed="0.074217"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:29:57.090466" elapsed="0.074217"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.165684" elapsed="0.000999"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:57.168688" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.167686" elapsed="0.075519"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:57.243205" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.243205" elapsed="0.085931"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:57.329136" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:29:57.371823" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.329136" elapsed="0.088296"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:57.419433" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.418432" elapsed="0.123360"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:57.550956" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.541792" elapsed="0.009164"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:57.556969" elapsed="0.000999"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:57.557968" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:57.557968" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:29:57.556969" elapsed="0.000999"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:29:57.558967" level="FAIL">Login failed for user 'admin' with password 'email': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:29:57.558967" elapsed="0.001000">Login failed for user 'admin' with password 'email': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:57.558967" elapsed="0.001000">Login failed for user 'admin' with password 'email': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:29:57.555968" elapsed="0.003999">Login failed for user 'admin' with password 'email': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=email</arg>
+<status status="FAIL" start="2025-05-12T12:29:57.165684" elapsed="0.394283">Login failed for user 'admin' with password 'email': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:57.087957" elapsed="0.473011">Login failed for user 'admin' with password 'email': Login != Dashboard</status>
+</test>
+<test id="s1-t8" name="Login with user 'admin' and password 'type'" line="12">
+<msg time="2025-05-12T12:29:57.563968" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'type'", 'arguments': {'${username}': 'admin', '${password}': 'type'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:57.565967" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.565967" elapsed="0.076347"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:29:57.564968" elapsed="0.077346"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.643317" elapsed="0.000998"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:57.644315" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.644315" elapsed="0.046433"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:57.691258" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.690748" elapsed="0.079088"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:57.769836" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:29:57.804158" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.769836" elapsed="0.064670"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:57.834506" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.834506" elapsed="0.090765"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:57.925271" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.925271" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:57.934549" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:57.934549" elapsed="0.001018"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:57.935567" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:29:57.934549" elapsed="0.001018"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:29:57.936565" level="FAIL">Login failed for user 'admin' with password 'type': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:29:57.935567" elapsed="0.002003">Login failed for user 'admin' with password 'type': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:57.935567" elapsed="0.002003">Login failed for user 'admin' with password 'type': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:29:57.934549" elapsed="0.003021">Login failed for user 'admin' with password 'type': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=type</arg>
+<status status="FAIL" start="2025-05-12T12:29:57.643317" elapsed="0.295257">Login failed for user 'admin' with password 'type': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:57.561968" elapsed="0.377597">Login failed for user 'admin' with password 'type': Login != Dashboard</status>
+</test>
+<test id="s1-t9" name="Login with user 'admin' and password 'username'" line="12">
+<msg time="2025-05-12T12:29:57.941787" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'username'", 'arguments': {'${username}': 'admin', '${password}': 'username'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:57.941787" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:57.941787" elapsed="0.133980"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:29:57.941787" elapsed="0.133980"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.085393" elapsed="0.001016"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:58.086409" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.086409" elapsed="0.122871"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:58.210280" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.209280" elapsed="0.080670"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:58.290949" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:29:58.339478" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.289950" elapsed="0.069535"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:58.360488" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.359485" elapsed="0.119171"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:58.481662" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.478656" elapsed="0.003006"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:58.482655" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:58.482655" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:58.482655" elapsed="0.001002"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:29:58.481662" elapsed="0.001995"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:29:58.484663" level="FAIL">Login failed for user 'admin' with password 'username': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:29:58.483657" elapsed="0.001006">Login failed for user 'admin' with password 'username': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:58.483657" elapsed="0.001006">Login failed for user 'admin' with password 'username': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:29:58.481662" elapsed="0.003001">Login failed for user 'admin' with password 'username': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=username</arg>
+<status status="FAIL" start="2025-05-12T12:29:58.085393" elapsed="0.400265">Login failed for user 'admin' with password 'username': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:57.939565" elapsed="0.547094">Login failed for user 'admin' with password 'username': Login != Dashboard</status>
+</test>
+<test id="s1-t10" name="Login with user 'admin' and password 'file'" line="12">
+<msg time="2025-05-12T12:29:58.490659" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'file'", 'arguments': {'${username}': 'admin', '${password}': 'file'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:58.493207" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.492191" elapsed="0.069258"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:29:58.490659" elapsed="0.070790"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.563450" elapsed="0.000000"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:58.564455" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.563450" elapsed="0.055537"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:58.619986" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.618987" elapsed="0.050686"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:58.669673" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:29:58.728422" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.669673" elapsed="0.077751"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:58.748424" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.748424" elapsed="0.096775"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:58.849204" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.846199" elapsed="0.004002"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:58.850201" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:58.851199" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:58.851199" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:29:58.850201" elapsed="0.000998"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:29:58.854204" level="FAIL">Login failed for user 'admin' with password 'file': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:29:58.853219" elapsed="0.000985">Login failed for user 'admin' with password 'file': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:58.851199" elapsed="0.003005">Login failed for user 'admin' with password 'file': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:29:58.850201" elapsed="0.004003">Login failed for user 'admin' with password 'file': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=file</arg>
+<status status="FAIL" start="2025-05-12T12:29:58.562451" elapsed="0.292750">Login failed for user 'admin' with password 'file': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:58.487661" elapsed="0.367540">Login failed for user 'admin' with password 'file': Login != Dashboard</status>
+</test>
+<test id="s1-t11" name="Login with user 'admin' and password 'title'" line="12">
+<msg time="2025-05-12T12:29:58.858206" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'title'", 'arguments': {'${username}': 'admin', '${password}': 'title'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:58.861201" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.860215" elapsed="0.101170"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:29:58.859205" elapsed="0.102180"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.962386" elapsed="0.000999"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:58.964387" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:58.963385" elapsed="0.087657"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:59.052550" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.052041" elapsed="0.103062"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:59.156111" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:29:59.176103" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.155103" elapsed="0.045541"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:59.201644" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.201644" elapsed="0.097396"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:59.308042" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.300040" elapsed="0.008002"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:59.309042" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:59.309042" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:59.309042" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:29:59.308042" elapsed="0.001998"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:29:59.311041" level="FAIL">Login failed for user 'admin' with password 'title': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:29:59.311041" elapsed="0.000000">Login failed for user 'admin' with password 'title': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:59.310040" elapsed="0.002003">Login failed for user 'admin' with password 'title': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:29:59.308042" elapsed="0.004001">Login failed for user 'admin' with password 'title': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=title</arg>
+<status status="FAIL" start="2025-05-12T12:29:58.961385" elapsed="0.350658">Login failed for user 'admin' with password 'title': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:58.856201" elapsed="0.455842">Login failed for user 'admin' with password 'title': Login != Dashboard</status>
+</test>
+<test id="s1-t12" name="Login with user 'admin' and password 'code'" line="12">
+<msg time="2025-05-12T12:29:59.314040" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'code'", 'arguments': {'${username}': 'admin', '${password}': 'code'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:59.316044" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.315041" elapsed="0.072074"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:29:59.315041" elapsed="0.072074"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.390118" elapsed="0.000998"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:59.392118" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.391116" elapsed="0.071427"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:59.463541" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.463541" elapsed="0.111320"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:59.575860" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:29:59.600188" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.574861" elapsed="0.049547"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:59.625403" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.625403" elapsed="0.092995"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:59.722506" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.719400" elapsed="0.003106"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:59.722506" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:59.722506" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:29:59.728618" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:29:59.722506" elapsed="0.006112"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:29:59.728618" level="FAIL">Login failed for user 'admin' with password 'code': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:29:59.728618" elapsed="0.001012">Login failed for user 'admin' with password 'code': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:59.728618" elapsed="0.001012">Login failed for user 'admin' with password 'code': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:29:59.722506" elapsed="0.007124">Login failed for user 'admin' with password 'code': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=code</arg>
+<status status="FAIL" start="2025-05-12T12:29:59.389129" elapsed="0.340501">Login failed for user 'admin' with password 'code': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:59.313040" elapsed="0.416590">Login failed for user 'admin' with password 'code': Login != Dashboard</status>
+</test>
+<test id="s1-t13" name="Login with user 'admin' and password 'q'" line="12">
+<msg time="2025-05-12T12:29:59.731846" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'q'", 'arguments': {'${username}': 'admin', '${password}': 'q'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:59.732849" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.732849" elapsed="0.048104"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:29:59.731846" elapsed="0.050105"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.782667" elapsed="0.000000"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:59.783674" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.782667" elapsed="0.066046"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:59.849711" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.848713" elapsed="0.069054"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:59.918771" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:29:59.941254" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.917767" elapsed="0.037207"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:29:59.955975" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:29:59.955975" elapsed="0.096879"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.063534" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.053870" elapsed="0.009664"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:00.064535" elapsed="0.000436"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:00.064971" elapsed="0.000414"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:00.065385" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:00.063534" elapsed="0.001851"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:30:00.065893" level="FAIL">Login failed for user 'admin' with password 'q': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:30:00.065893" elapsed="0.000000">Login failed for user 'admin' with password 'q': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:00.065385" elapsed="0.000508">Login failed for user 'admin' with password 'q': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:30:00.063534" elapsed="0.003370">Login failed for user 'admin' with password 'q': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=q</arg>
+<status status="FAIL" start="2025-05-12T12:29:59.782160" elapsed="0.284744">Login failed for user 'admin' with password 'q': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:59.730632" elapsed="0.336272">Login failed for user 'admin' with password 'q': Login != Dashboard</status>
+</test>
+<test id="s1-t14" name="Login with user 'admin' and password 'submit'" line="12">
+<msg time="2025-05-12T12:30:00.068904" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'submit'", 'arguments': {'${username}': 'admin', '${password}': 'submit'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.070906" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.069906" elapsed="0.058542"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:00.069906" elapsed="0.058542"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.131446" elapsed="0.000000"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.133462" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.132448" elapsed="0.060997"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.203945" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.202930" elapsed="0.105778"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.309708" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:30:00.343579" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.309708" elapsed="0.059971"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.370684" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.370684" elapsed="0.097597"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.478121" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.468281" elapsed="0.009840"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:00.478121" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:00.478121" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:00.478121" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:00.478121" elapsed="0.000000"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:30:00.478121" level="FAIL">Login failed for user 'admin' with password 'submit': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:30:00.478121" elapsed="0.000000">Login failed for user 'admin' with password 'submit': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:00.478121" elapsed="0.000000">Login failed for user 'admin' with password 'submit': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:30:00.478121" elapsed="0.000000">Login failed for user 'admin' with password 'submit': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=submit</arg>
+<status status="FAIL" start="2025-05-12T12:30:00.129446" elapsed="0.348675">Login failed for user 'admin' with password 'submit': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:00.066904" elapsed="0.411217">Login failed for user 'admin' with password 'submit': Login != Dashboard</status>
+</test>
+<test id="s1-t15" name="Login with user 'admin' and password 'user'" line="12">
+<msg time="2025-05-12T12:30:00.489596" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'user'", 'arguments': {'${username}': 'admin', '${password}': 'user'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.490560" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.490560" elapsed="0.057023"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:00.489596" elapsed="0.057987"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.548572" elapsed="0.000000"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.549571" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.549571" elapsed="0.068265"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.618835" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.617836" elapsed="0.098270"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.717467" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:30:00.746850" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.717467" elapsed="0.047043"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.765522" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.764510" elapsed="0.081799"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.851308" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.847311" elapsed="0.003997"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:00.851308" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:00.852309" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:00.852487" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:00.851308" elapsed="0.001179"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:30:00.854495" level="FAIL">Login failed for user 'admin' with password 'user': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:30:00.852487" elapsed="0.002008">Login failed for user 'admin' with password 'user': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:00.852487" elapsed="0.002008">Login failed for user 'admin' with password 'user': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:30:00.851308" elapsed="0.003187">Login failed for user 'admin' with password 'user': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=user</arg>
+<status status="FAIL" start="2025-05-12T12:30:00.547583" elapsed="0.306912">Login failed for user 'admin' with password 'user': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:00.486543" elapsed="0.368961">Login failed for user 'admin' with password 'user': Login != Dashboard</status>
+</test>
+<test id="s1-t16" name="Login with user 'admin' and password 'token'" line="12">
+<msg time="2025-05-12T12:30:00.857505" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'token'", 'arguments': {'${username}': 'admin', '${password}': 'token'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.859498" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.858497" elapsed="0.041328"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:00.858497" elapsed="0.041328"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.903522" elapsed="0.003999"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.908524" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.907521" elapsed="0.056360"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:00.964880" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:30:00.963881" elapsed="0.080097"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.043978" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:30:01.065626" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.043978" elapsed="0.048191"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.093687" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.093180" elapsed="0.065728"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.163617" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.159908" elapsed="0.003709"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.163617" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.164618" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.164618" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:01.163617" elapsed="0.001001"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:30:01.165610" level="FAIL">Login failed for user 'admin' with password 'token': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:30:01.164618" elapsed="0.000992">Login failed for user 'admin' with password 'token': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:01.164618" elapsed="0.000992">Login failed for user 'admin' with password 'token': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:30:01.163617" elapsed="0.001993">Login failed for user 'admin' with password 'token': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=token</arg>
+<status status="FAIL" start="2025-05-12T12:30:00.902509" elapsed="0.263101">Login failed for user 'admin' with password 'token': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:00.855504" elapsed="0.311125">Login failed for user 'admin' with password 'token': Login != Dashboard</status>
+</test>
+<test id="s1-t17" name="Login with user 'admin' and password 'delete'" line="12">
+<msg time="2025-05-12T12:30:01.167626" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'delete'", 'arguments': {'${username}': 'admin', '${password}': 'delete'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.168627" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.168627" elapsed="0.032479"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:01.168627" elapsed="0.032479"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.202300" elapsed="0.000000"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.202300" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.202300" elapsed="0.044214"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.246514" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.246514" elapsed="0.053276"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.300792" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:30:01.317090" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.300792" elapsed="0.033300"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.335092" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.334092" elapsed="0.060469"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.399560" level="INFO">${title} = Login</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.394561" elapsed="0.005995"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.400556" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.401664" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.401664" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:01.400556" elapsed="0.001108"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-05-12T12:30:01.402583" level="FAIL">Login failed for user 'admin' with password 'delete': Login != Dashboard</msg>
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="FAIL" start="2025-05-12T12:30:01.401664" elapsed="0.000919">Login failed for user 'admin' with password 'delete': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:01.401664" elapsed="0.000919">Login failed for user 'admin' with password 'delete': Login != Dashboard</status>
+</branch>
+<status status="FAIL" start="2025-05-12T12:30:01.400556" elapsed="0.002027">Login failed for user 'admin' with password 'delete': Login != Dashboard</status>
+</if>
+<arg>username=admin</arg>
+<arg>password=delete</arg>
+<status status="FAIL" start="2025-05-12T12:30:01.202300" elapsed="0.200283">Login failed for user 'admin' with password 'delete': Login != Dashboard</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:01.166629" elapsed="0.236970">Login failed for user 'admin' with password 'delete': Login != Dashboard</status>
+</test>
+<test id="s1-t18" name="Login with user 'admin' and password 'secret'" line="12">
+<msg time="2025-05-12T12:30:01.407601" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'secret'", 'arguments': {'${username}': 'admin', '${password}': 'secret'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.410598" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.409610" elapsed="0.059754"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:01.408596" elapsed="0.060768"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.471368" elapsed="0.000999"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.475370" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.473381" elapsed="0.045915"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.521297" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.519296" elapsed="0.054317"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.575610" level="INFO">Typing password into text field 'id=Password'.</msg>
+<msg time="2025-05-12T12:30:01.603987" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.574618" elapsed="0.048169"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.623788" level="INFO">Clicking button 'id=Login'.</msg>
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.622787" elapsed="0.074667"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.698694" level="INFO">${title} = Dashboard</msg>
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.698694" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.698694" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<msg time="2025-05-12T12:30:01.704083" level="INFO">${LOGIN_SUCCESS} = True</msg>
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.704083" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.705098" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:01.698694" elapsed="0.006404"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.705098" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:01.705098" elapsed="0.000000"/>
+</branch>
+<status status="PASS" start="2025-05-12T12:30:01.698694" elapsed="0.007406"/>
+</if>
+<arg>username=admin</arg>
+<arg>password=secret</arg>
+<status status="PASS" start="2025-05-12T12:30:01.470361" elapsed="0.235739"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:01.404597" elapsed="0.301503"/>
+</test>
+<test id="s1-t19" name="Login with user 'admin' and password 'message'" line="12">
+<msg time="2025-05-12T12:30:01.708628" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'message'", 'arguments': {'${username}': 'admin', '${password}': 'message'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.710643" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.709648" elapsed="0.070370"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:01.709648" elapsed="0.071700"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2025-05-12T12:30:01.783094" level="FAIL">SKIPPED: Login already succeeded with previous credentials</msg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2025-05-12T12:30:01.782083" elapsed="0.001011">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-05-12T12:30:01.782083" elapsed="0.001011">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.783094" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.783094" elapsed="0.001000"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.784094" elapsed="0.000000"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.784094" elapsed="0.000000"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.784094" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.784094" elapsed="0.001005"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.785099" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.785099" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:01.784094" elapsed="0.001005"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.785099" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:01.785099" elapsed="0.000000"/>
+</branch>
+<status status="NOT RUN" start="2025-05-12T12:30:01.784094" elapsed="0.001005"/>
+</if>
+<arg>username=admin</arg>
+<arg>password=message</arg>
+<status status="FAIL" start="2025-05-12T12:30:01.781572" elapsed="0.004530">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:01.707113" elapsed="0.078989">SKIPPED: Login already succeeded with previous credentials</status>
+</test>
+<test id="s1-t20" name="Login with user 'admin' and password 't'" line="12">
+<msg time="2025-05-12T12:30:01.790098" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 't'", 'arguments': {'${username}': 'admin', '${password}': 't'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.792096" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.791097" elapsed="0.046447"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:01.791097" elapsed="0.047450"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2025-05-12T12:30:01.840576" level="FAIL">SKIPPED: Login already succeeded with previous credentials</msg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2025-05-12T12:30:01.840576" elapsed="0.000971">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-05-12T12:30:01.839546" elapsed="0.002001">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.841547" elapsed="0.000998"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.842936" elapsed="0.000134"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.843070" elapsed="0.000000"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.843070" elapsed="0.000000"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.843070" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.844094" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.844094" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.844094" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:01.843070" elapsed="0.001024"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.844094" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:01.844094" elapsed="0.000989"/>
+</branch>
+<status status="NOT RUN" start="2025-05-12T12:30:01.843070" elapsed="0.002013"/>
+</if>
+<arg>username=admin</arg>
+<arg>password=t</arg>
+<status status="FAIL" start="2025-05-12T12:30:01.838547" elapsed="0.006536">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:01.786102" elapsed="0.058981">SKIPPED: Login already succeeded with previous credentials</status>
+</test>
+<test id="s1-t21" name="Login with user 'admin' and password 'c'" line="12">
+<msg time="2025-05-12T12:30:01.846079" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'c'", 'arguments': {'${username}': 'admin', '${password}': 'c'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.847080" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.847080" elapsed="0.053702"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:01.846079" elapsed="0.054703"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2025-05-12T12:30:01.902481" level="FAIL">SKIPPED: Login already succeeded with previous credentials</msg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2025-05-12T12:30:01.902481" elapsed="0.000000">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-05-12T12:30:01.901969" elapsed="0.000512">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.902481" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.902481" elapsed="0.000000"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.902481" elapsed="0.000000"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.903496" elapsed="0.000000"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.903496" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.905495" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.906492" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.906492" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:01.904493" elapsed="0.001999"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.907492" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:01.907492" elapsed="0.000000"/>
+</branch>
+<status status="NOT RUN" start="2025-05-12T12:30:01.903496" elapsed="0.003996"/>
+</if>
+<arg>username=admin</arg>
+<arg>password=c</arg>
+<status status="FAIL" start="2025-05-12T12:30:01.900782" elapsed="0.007711">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:01.845083" elapsed="0.063410">SKIPPED: Login already succeeded with previous credentials</status>
+</test>
+<test id="s1-t22" name="Login with user 'admin' and password 'data'" line="12">
+<msg time="2025-05-12T12:30:01.910495" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'data'", 'arguments': {'${username}': 'admin', '${password}': 'data'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.911493" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.911493" elapsed="0.044311"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:01.910495" elapsed="0.045309"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2025-05-12T12:30:01.959805" level="FAIL">SKIPPED: Login already succeeded with previous credentials</msg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2025-05-12T12:30:01.958808" elapsed="0.000997">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-05-12T12:30:01.957808" elapsed="0.001997">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.959805" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.959805" elapsed="0.000000"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.959805" elapsed="0.000000"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.961199" elapsed="0.000000"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.961199" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.961199" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.961199" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.962212" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:01.961199" elapsed="0.001013"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:01.962212" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:01.962212" elapsed="0.000000"/>
+</branch>
+<status status="NOT RUN" start="2025-05-12T12:30:01.961199" elapsed="0.001013"/>
+</if>
+<arg>username=admin</arg>
+<arg>password=data</arg>
+<status status="FAIL" start="2025-05-12T12:30:01.956806" elapsed="0.005406">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:01.908493" elapsed="0.054731">SKIPPED: Login already succeeded with previous credentials</status>
+</test>
+<test id="s1-t23" name="Login with user 'admin' and password 'mode'" line="12">
+<msg time="2025-05-12T12:30:01.966224" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'mode'", 'arguments': {'${username}': 'admin', '${password}': 'mode'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:01.968227" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:01.968227" elapsed="0.052280"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:01.967228" elapsed="0.054284"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2025-05-12T12:30:02.024513" level="FAIL">SKIPPED: Login already succeeded with previous credentials</msg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.023512" elapsed="0.001001">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.022510" elapsed="0.002003">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.025511" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.025511" elapsed="0.000000"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.025511" elapsed="0.000000"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.026511" elapsed="0.000000"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.026511" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.026511" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.026511" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.027509" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.026511" elapsed="0.000998"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.027509" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.027509" elapsed="0.001002"/>
+</branch>
+<status status="NOT RUN" start="2025-05-12T12:30:02.026511" elapsed="0.002000"/>
+</if>
+<arg>username=admin</arg>
+<arg>password=mode</arg>
+<status status="FAIL" start="2025-05-12T12:30:02.021512" elapsed="0.006999">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:01.964236" elapsed="0.064275">SKIPPED: Login already succeeded with previous credentials</status>
+</test>
+<test id="s1-t24" name="Login with user 'admin' and password 'order'" line="12">
+<msg time="2025-05-12T12:30:02.031520" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'order'", 'arguments': {'${username}': 'admin', '${password}': 'order'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:02.033271" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:02.032859" elapsed="0.051384"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:02.032089" elapsed="0.052154"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2025-05-12T12:30:02.086241" level="FAIL">SKIPPED: Login already succeeded with previous credentials</msg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.086241" elapsed="0.000000">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.085239" elapsed="0.001002">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.087242" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.087242" elapsed="0.000000"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.087242" elapsed="0.001001"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.088243" elapsed="0.000000"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.088243" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.089242" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.089242" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.089242" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.088243" elapsed="0.000999"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.089242" elapsed="0.000999"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.089242" elapsed="0.000999"/>
+</branch>
+<status status="NOT RUN" start="2025-05-12T12:30:02.088243" elapsed="0.001998"/>
+</if>
+<arg>username=admin</arg>
+<arg>password=order</arg>
+<status status="FAIL" start="2025-05-12T12:30:02.084243" elapsed="0.005998">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:02.029511" elapsed="0.061733">SKIPPED: Login already succeeded with previous credentials</status>
+</test>
+<test id="s1-t25" name="Login with user 'admin' and password 'lang'" line="12">
+<msg time="2025-05-12T12:30:02.093243" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'lang'", 'arguments': {'${username}': 'admin', '${password}': 'lang'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:02.095211" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:02.095211" elapsed="0.051623"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:02.094347" elapsed="0.052487"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2025-05-12T12:30:02.148834" level="FAIL">SKIPPED: Login already succeeded with previous credentials</msg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.148834" elapsed="0.000000">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.147834" elapsed="0.001000">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.149835" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.149835" elapsed="0.000000"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.149835" elapsed="0.000000"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.150833" elapsed="0.000000"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.150833" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.150833" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.150833" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.151832" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.150833" elapsed="0.000999"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.151832" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.151832" elapsed="0.000000"/>
+</branch>
+<status status="NOT RUN" start="2025-05-12T12:30:02.150833" elapsed="0.000999"/>
+</if>
+<arg>username=admin</arg>
+<arg>password=lang</arg>
+<status status="FAIL" start="2025-05-12T12:30:02.147834" elapsed="0.003998">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:02.091244" elapsed="0.061588">SKIPPED: Login already succeeded with previous credentials</status>
+</test>
+<test id="s1-t26" name="Login with user 'admin' and password 'p'" line="12">
+<msg time="2025-05-12T12:30:02.154818" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'p'", 'arguments': {'${username}': 'admin', '${password}': 'p'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:02.156762" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:02.154818" elapsed="0.058468"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:02.154818" elapsed="0.059457"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2025-05-12T12:30:02.215113" level="FAIL">SKIPPED: Login already succeeded with previous credentials</msg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.215113" elapsed="0.000000">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.215113" elapsed="0.000000">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.215113" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.215113" elapsed="0.000000"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.215113" elapsed="0.000000"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.215113" elapsed="0.000000"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.215113" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.215113" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.215113" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.215113" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.215113" elapsed="0.000000"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.215113" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.215113" elapsed="0.000000"/>
+</branch>
+<status status="NOT RUN" start="2025-05-12T12:30:02.215113" elapsed="0.000000"/>
+</if>
+<arg>username=admin</arg>
+<arg>password=p</arg>
+<status status="FAIL" start="2025-05-12T12:30:02.214275" elapsed="0.000838">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:02.152832" elapsed="0.062281">SKIPPED: Login already succeeded with previous credentials</status>
+</test>
+<test id="s1-t27" name="Login with user 'admin' and password 'key'" line="12">
+<msg time="2025-05-12T12:30:02.223211" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'key'", 'arguments': {'${username}': 'admin', '${password}': 'key'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:02.225186" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:02.225186" elapsed="0.069986"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:02.223211" elapsed="0.072471"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2025-05-12T12:30:02.296694" level="FAIL">SKIPPED: Login already succeeded with previous credentials</msg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.296694" elapsed="0.001001">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.296694" elapsed="0.001001">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.298696" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.298696" elapsed="0.000000"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.298696" elapsed="0.000000"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.298696" elapsed="0.000000"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.298696" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.299695" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.299695" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.299695" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.299695" elapsed="0.000000"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.299695" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.299695" elapsed="0.001000"/>
+</branch>
+<status status="NOT RUN" start="2025-05-12T12:30:02.299695" elapsed="0.001000"/>
+</if>
+<arg>username=admin</arg>
+<arg>password=key</arg>
+<status status="FAIL" start="2025-05-12T12:30:02.295682" elapsed="0.005013">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:02.215113" elapsed="0.085582">SKIPPED: Login already succeeded with previous credentials</status>
+</test>
+<test id="s1-t28" name="Login with user 'admin' and password 'status'" line="12">
+<msg time="2025-05-12T12:30:02.302697" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'status'", 'arguments': {'${username}': 'admin', '${password}': 'status'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:02.303695" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:02.303695" elapsed="0.074783"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:02.302697" elapsed="0.075781"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2025-05-12T12:30:02.382380" level="FAIL">SKIPPED: Login already succeeded with previous credentials</msg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.382190" elapsed="0.000190">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.380484" elapsed="0.001896">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.383392" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.383392" elapsed="0.000000"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.383392" elapsed="0.000000"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.383392" elapsed="0.000000"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.383392" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.384388" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.384388" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.384388" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.383392" elapsed="0.000996"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.384388" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.384388" elapsed="0.000000"/>
+</branch>
+<status status="NOT RUN" start="2025-05-12T12:30:02.383392" elapsed="0.000996"/>
+</if>
+<arg>username=admin</arg>
+<arg>password=status</arg>
+<status status="FAIL" start="2025-05-12T12:30:02.379471" elapsed="0.004917">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:02.301694" elapsed="0.083698">SKIPPED: Login already succeeded with previous credentials</status>
+</test>
+<test id="s1-t29" name="Login with user 'admin' and password 'start'" line="12">
+<msg time="2025-05-12T12:30:02.386392" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'start'", 'arguments': {'${username}': 'admin', '${password}': 'start'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:02.387392" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:02.387392" elapsed="0.062154"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:02.387392" elapsed="0.062154"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2025-05-12T12:30:02.452084" level="FAIL">SKIPPED: Login already succeeded with previous credentials</msg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.452084" elapsed="0.000000">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.451066" elapsed="0.001018">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.453357" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.453357" elapsed="0.000000"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.453357" elapsed="0.000000"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.453357" elapsed="0.000000"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.454370" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.457381" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.458367" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.459369" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.454370" elapsed="0.004999"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.459369" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.459369" elapsed="0.000000"/>
+</branch>
+<status status="NOT RUN" start="2025-05-12T12:30:02.454370" elapsed="0.004999"/>
+</if>
+<arg>username=admin</arg>
+<arg>password=start</arg>
+<status status="FAIL" start="2025-05-12T12:30:02.450551" elapsed="0.009821">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:02.385392" elapsed="0.074980">SKIPPED: Login already succeeded with previous credentials</status>
+</test>
+<test id="s1-t30" name="Login with user 'admin' and password 'charset'" line="12">
+<msg time="2025-05-12T12:30:02.463565" level="INFO">${DataDriver_TEST_DATA} = {'test_case_name': "Login with user 'admin' and password 'charset'", 'arguments': {'${username}': 'admin', '${password}': 'charset'}, 'tags': None, 'documentation': None}</msg>
+<kw name="Open Login Page" owner="login_resources" type="SETUP">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-05-12T12:30:02.464238" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-05-12T12:30:02.464238" elapsed="0.062553"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:02.463565" elapsed="0.064227"/>
+</kw>
+<kw name="Valid Login Should Succeed">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Fail" owner="BuiltIn">
+<msg time="2025-05-12T12:30:02.529829" level="FAIL">SKIPPED: Login already succeeded with previous credentials</msg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.529829" elapsed="0.000000">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<arg>'${LOGIN_SUCCESS}' == 'True'</arg>
+<arg>Fail</arg>
+<arg>SKIPPED: Login already succeeded with previous credentials</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-05-12T12:30:02.528791" elapsed="0.001038">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>${LOGIN URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.530788" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<arg>id=Username</arg>
+<arg>${username}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.530788" elapsed="0.000000"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<arg>id=Password</arg>
+<arg>${password}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.530788" elapsed="0.000000"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<arg>id=Login</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.530788" elapsed="0.000999"/>
+</kw>
+<kw name="Get Title" owner="SeleniumLibrary">
+<var>${title}</var>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.531787" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="'${title}' == 'Dashboard'">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login successful with username: ${username} and password: ${password}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.531787" elapsed="0.000000"/>
+</kw>
+<kw name="Set Global Variable" owner="BuiltIn">
+<arg>${LOGIN_SUCCESS}</arg>
+<arg>True</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.532587" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.532908" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.531787" elapsed="0.001121"/>
+</branch>
+<branch type="ELSE">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${title}</arg>
+<arg>Dashboard</arg>
+<arg>Login failed for user '${username}' with password '${password}'</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" start="2025-05-12T12:30:02.532908" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-12T12:30:02.532908" elapsed="0.000000"/>
+</branch>
+<status status="NOT RUN" start="2025-05-12T12:30:02.531787" elapsed="0.001121"/>
+</if>
+<arg>username=admin</arg>
+<arg>password=charset</arg>
+<status status="FAIL" start="2025-05-12T12:30:02.527792" elapsed="0.005623">SKIPPED: Login already succeeded with previous credentials</status>
+</kw>
+<status status="FAIL" start="2025-05-12T12:30:02.461376" elapsed="0.072039">SKIPPED: Login already succeeded with previous credentials</status>
+</test>
+<kw name="Close Browsers" owner="login_resources" type="TEARDOWN">
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2025-05-12T12:30:02.534426" elapsed="2.806775"/>
+</kw>
+<status status="PASS" start="2025-05-12T12:30:02.534426" elapsed="2.806775"/>
+</kw>
+<status status="FAIL" start="2025-05-12T12:29:42.465698" elapsed="22.875503"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="29" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="DataDriven" id="s1" pass="1" fail="29" skip="0">DataDriven</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

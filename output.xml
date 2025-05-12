@@ -1,1766 +1,1274 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.12.8 on win32)" generated="2025-05-07T12:01:52.181882" rpa="false" schemaversion="5">
-<suite id="s1" name="DataDriven" source="C:\Users\philin\Documents\Visual Studio Code\pythonlab\bruteforce\Login Tests\DataDriven.robot">
-<kw name="Open my Browser" owner="login_resources" type="SETUP">
-<kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:01:52.515719" level="INFO">Opening browser 'firefox' to base url 'http://127.0.0.1:5000'.</msg>
-<arg>${LOGIN URL}</arg>
-<arg>browser=${BROWSER}</arg>
-<doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:01:52.514718" elapsed="11.413132"/>
+<robot generator="Robot 7.2 (Python 3.12.8 on win32)" generated="2025-05-09T11:12:01.584846" rpa="false" schemaversion="5">
+<suite id="s1" name="BruteForce" source="C:\Users\bjornol\Testudo_code\bruteforce\BruteForce.robot">
+<test id="s1-t1" name="Fail Immediately If Brute Force Detected" line="11">
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2025-05-09T11:12:01.624186" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\bjornol\Testudo_code\bruteforce\login_attempts.log"&gt;C:\Users\bjornol\Testudo_code\bruteforce\login_attempts.log&lt;/a&gt;'.</msg>
+<msg time="2025-05-09T11:12:01.625362" level="INFO">${content} = 2025-05-09T10:42:37.894312 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: id | SUCCESS: False
+2025-05-09T10:42:38.821042 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: action | SUCCESS: False
+2025-05-09...</msg>
+<var>${content}</var>
+<arg>${LOG_FILE}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.624186" elapsed="0.001176"/>
 </kw>
-<kw name="Set Window Position" owner="SeleniumLibrary">
-<arg>0</arg>
-<arg>0</arg>
-<doc>Sets window position using ``x`` and ``y`` coordinates.</doc>
-<status status="PASS" start="2025-05-07T12:02:03.928850" elapsed="0.027515"/>
+<kw name="Split To Lines" owner="String">
+<msg time="2025-05-09T11:12:01.625572" level="INFO">18 lines returned</msg>
+<msg time="2025-05-09T11:12:01.625572" level="INFO">${lines} = ['2025-05-09T10:42:37.894312 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: id | SUCCESS: False', '2025-05-09T10:42:38.821042 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: action | SUCCESS: False', '20...</msg>
+<var>${lines}</var>
+<arg>${content}</arg>
+<doc>Splits the given string to lines.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.625572" elapsed="0.000000"/>
 </kw>
-<kw name="Set Window Size" owner="SeleniumLibrary">
-<arg>960</arg>
-<arg>1000</arg>
-<doc>Sets current windows size to given ``width`` and ``height``.</doc>
-<status status="PASS" start="2025-05-07T12:02:03.957378" elapsed="0.069291"/>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.625572" level="INFO">${failed_ips} = {}</msg>
+<var>${failed_ips}</var>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.625572" elapsed="0.000000"/>
 </kw>
-<status status="PASS" start="2025-05-07T12:01:52.513717" elapsed="11.512952"/>
+<for flavor="IN">
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.626614" elapsed="0.000000"/>
 </kw>
-<test id="s1-t1" name="Login with user 'admin' and password 'id'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:04.030668" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:04.029668" elapsed="0.044341"/>
+<msg time="2025-05-09T11:12:01.626614" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.626614" elapsed="0.000000"/>
 </kw>
-<status status="PASS" start="2025-05-07T12:02:04.028667" elapsed="0.046341"/>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.626614" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.626614" elapsed="0.000000"/>
 </kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:04.077011" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:04.076008" elapsed="0.193799"/>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.626614" level="INFO">${ts_match} = ['2025-05-09T10:42:37.894312 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.626614" elapsed="0.000000"/>
 </kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:04.076008" elapsed="0.194811"/>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.626614" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.627664" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.626614" elapsed="0.001050"/>
 </kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:04.271819" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:04.294428" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:04.271819" elapsed="0.039245"/>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.627664" level="INFO">Length is 67.</msg>
+<msg time="2025-05-09T11:12:01.627664" level="INFO">${ts_len} = 67</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.627664" elapsed="0.000000"/>
 </kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:04.270819" elapsed="0.040245"/>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.627664" elapsed="0.000000"/>
 </kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:04.315577" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:04.315577" elapsed="0.206865"/>
+<status status="PASS" start="2025-05-09T11:12:01.626614" elapsed="0.001050"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.626614" elapsed="0.001050"/>
+</if>
+<var name="${line}">2025-05-09T10:42:37.894312 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: id | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.626614" elapsed="0.001050"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.627664" elapsed="0.000000"/>
 </kw>
-<status status="PASS" start="2025-05-07T12:02:04.312064" elapsed="0.210378"/>
+<msg time="2025-05-09T11:12:01.627664" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.627664" elapsed="0.000000"/>
 </kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:04.527589" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:04.522442" elapsed="0.005147"/>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.628667" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.627664" elapsed="0.001003"/>
 </kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:04.528590" level="FAIL">Login failed for user 'admin' with password 'id': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:04.527589" elapsed="0.001001">Login failed for user 'admin' with password 'id': Login != Dashboard</status>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.628667" level="INFO">${ts_match} = ['2025-05-09T10:42:38.821042 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.628667" elapsed="0.000000"/>
 </kw>
-<arg>username=admin</arg>
-<arg>password=id</arg>
-<status status="FAIL" start="2025-05-07T12:02:04.075008" elapsed="0.453582">Login failed for user 'admin' with password 'id': Login != Dashboard</status>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.628667" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.628667" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.628667" elapsed="0.000000"/>
 </kw>
-<status status="FAIL" start="2025-05-07T12:02:04.026669" elapsed="0.509614">Login failed for user 'admin' with password 'id': Login != Dashboard</status>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.628667" level="INFO">Length is 71.</msg>
+<msg time="2025-05-09T11:12:01.628667" level="INFO">${ts_len} = 71</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.628667" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.628667" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.627664" elapsed="0.001003"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.627664" elapsed="0.001003"/>
+</if>
+<var name="${line}">2025-05-09T10:42:38.821042 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: action | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.627664" elapsed="0.001003"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.629811" elapsed="0.000000"/>
+</kw>
+<msg time="2025-05-09T11:12:01.629811" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.629811" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.629811" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.629811" elapsed="0.000000"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.629811" level="INFO">${ts_match} = ['2025-05-09T10:42:39.669889 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.629811" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.630818" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.630818" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.629811" elapsed="0.001007"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.630818" level="INFO">Length is 69.</msg>
+<msg time="2025-05-09T11:12:01.630818" level="INFO">${ts_len} = 69</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.630818" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.630818" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.629811" elapsed="0.001007"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.629811" elapsed="0.001007"/>
+</if>
+<var name="${line}">2025-05-09T10:42:39.669889 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: page | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.629811" elapsed="0.001007"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.630818" elapsed="0.000000"/>
+</kw>
+<msg time="2025-05-09T11:12:01.630818" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.630818" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.631817" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.630818" elapsed="0.000999"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.631817" level="INFO">${ts_match} = ['2025-05-09T10:42:40.498620 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.631817" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.631817" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.631817" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.631817" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.631817" level="INFO">Length is 69.</msg>
+<msg time="2025-05-09T11:12:01.631817" level="INFO">${ts_len} = 69</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.631817" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.631817" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.630818" elapsed="0.000999"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.630818" elapsed="0.000999"/>
+</if>
+<var name="${line}">2025-05-09T10:42:40.498620 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: name | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.630818" elapsed="0.000999"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.631817" elapsed="0.001000"/>
+</kw>
+<msg time="2025-05-09T11:12:01.632817" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.631817" elapsed="0.001000"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.632817" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.632817" elapsed="0.000000"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.633820" level="INFO">${ts_match} = ['2025-05-09T10:42:41.089183 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.632817" elapsed="0.001003"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.633820" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.633820" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.633820" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.634819" level="INFO">Length is 73.</msg>
+<msg time="2025-05-09T11:12:01.634819" level="INFO">${ts_len} = 73</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.634819" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.634819" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.632817" elapsed="0.002002"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.632817" elapsed="0.002002"/>
+</if>
+<var name="${line}">2025-05-09T10:42:41.089183 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: password | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.631817" elapsed="0.003002"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.635818" elapsed="0.000000"/>
+</kw>
+<msg time="2025-05-09T11:12:01.635818" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.635818" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.635818" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.635818" elapsed="0.000000"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.636818" level="INFO">${ts_match} = ['2025-05-09T10:42:41.560692 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.636818" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.636818" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.636818" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.636818" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.636818" level="INFO">Length is 68.</msg>
+<msg time="2025-05-09T11:12:01.636818" level="INFO">${ts_len} = 68</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.636818" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.636818" elapsed="0.001099"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.635818" elapsed="0.002099"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.635818" elapsed="0.002099"/>
+</if>
+<var name="${line}">2025-05-09T10:42:41.560692 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: url | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.635818" elapsed="0.002099"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.637917" elapsed="0.000000"/>
+</kw>
+<msg time="2025-05-09T11:12:01.637917" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.637917" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.638826" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.638826" elapsed="0.000000"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.638826" level="INFO">${ts_match} = ['2025-05-09T10:42:42.027332 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.638826" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.638826" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.638826" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.638826" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.638826" level="INFO">Length is 70.</msg>
+<msg time="2025-05-09T11:12:01.639909" level="INFO">${ts_len} = 70</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.638826" elapsed="0.001083"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.639909" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.637917" elapsed="0.001992"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.637917" elapsed="0.001992"/>
+</if>
+<var name="${line}">2025-05-09T10:42:42.027332 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: email | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.637917" elapsed="0.001992"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.639909" elapsed="0.000000"/>
+</kw>
+<msg time="2025-05-09T11:12:01.639909" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.639909" elapsed="0.000915"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.640824" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.640824" elapsed="0.000000"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.640824" level="INFO">${ts_match} = ['2025-05-09T10:42:42.329516 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.640824" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.640824" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.640824" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.640824" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.640824" level="INFO">Length is 69.</msg>
+<msg time="2025-05-09T11:12:01.640824" level="INFO">${ts_len} = 69</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.640824" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.641825" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.640824" elapsed="0.001001"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.640824" elapsed="0.001001"/>
+</if>
+<var name="${line}">2025-05-09T10:42:42.329516 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: type | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.639909" elapsed="0.001916"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.641825" elapsed="0.001013"/>
+</kw>
+<msg time="2025-05-09T11:12:01.642838" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.641825" elapsed="0.001013"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.642838" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.642838" elapsed="0.000000"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.642838" level="INFO">${ts_match} = ['2025-05-09T10:42:42.626835 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.642838" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.642838" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.642838" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.642838" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.642838" level="INFO">Length is 73.</msg>
+<msg time="2025-05-09T11:12:01.642838" level="INFO">${ts_len} = 73</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.642838" elapsed="0.001066"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.643904" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.642838" elapsed="0.001066"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.642838" elapsed="0.001066"/>
+</if>
+<var name="${line}">2025-05-09T10:42:42.626835 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: username | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.641825" elapsed="0.002079"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.643904" elapsed="0.000000"/>
+</kw>
+<msg time="2025-05-09T11:12:01.643904" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.643904" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.643904" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.643904" elapsed="0.000000"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.643904" level="INFO">${ts_match} = ['2025-05-09T10:42:42.945575 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.643904" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.644915" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.644915" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.644915" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.645116" level="INFO">Length is 69.</msg>
+<msg time="2025-05-09T11:12:01.645116" level="INFO">${ts_len} = 69</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.645116" elapsed="0.000243"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.645359" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.643904" elapsed="0.001455"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.643904" elapsed="0.001455"/>
+</if>
+<var name="${line}">2025-05-09T10:42:42.945575 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: file | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.643904" elapsed="0.001455"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.645359" elapsed="0.000000"/>
+</kw>
+<msg time="2025-05-09T11:12:01.645359" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.645359" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.645359" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.645359" elapsed="0.000000"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.645359" level="INFO">${ts_match} = ['2025-05-09T10:42:43.289231 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.645359" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.646438" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.646438" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.645359" elapsed="0.001079"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.646438" level="INFO">Length is 70.</msg>
+<msg time="2025-05-09T11:12:01.646438" level="INFO">${ts_len} = 70</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.646438" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.646438" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.645359" elapsed="0.001079"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.645359" elapsed="0.001079"/>
+</if>
+<var name="${line}">2025-05-09T10:42:43.289231 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: title | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.645359" elapsed="0.001079"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.646438" elapsed="0.000000"/>
+</kw>
+<msg time="2025-05-09T11:12:01.646438" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.646438" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.647438" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.646438" elapsed="0.001000"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.647438" level="INFO">${ts_match} = ['2025-05-09T10:42:43.799517 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.647438" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.647438" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.647438" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.647438" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.647438" level="INFO">Length is 69.</msg>
+<msg time="2025-05-09T11:12:01.647438" level="INFO">${ts_len} = 69</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.647438" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.647438" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.646438" elapsed="0.001000"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.646438" elapsed="0.001000"/>
+</if>
+<var name="${line}">2025-05-09T10:42:43.799517 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: code | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.646438" elapsed="0.001000"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.647438" elapsed="0.001008"/>
+</kw>
+<msg time="2025-05-09T11:12:01.648446" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.647438" elapsed="0.001008"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.648446" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.648446" elapsed="0.000000"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.649361" level="INFO">${ts_match} = ['2025-05-09T10:42:44.328617 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.649361" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.649361" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.649361" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.649361" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.649361" level="INFO">Length is 66.</msg>
+<msg time="2025-05-09T11:12:01.649361" level="INFO">${ts_len} = 66</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.649361" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.649361" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.648446" elapsed="0.000915"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.648446" elapsed="0.000915"/>
+</if>
+<var name="${line}">2025-05-09T10:42:44.328617 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: q | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.647438" elapsed="0.001923"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.649361" elapsed="0.001084"/>
+</kw>
+<msg time="2025-05-09T11:12:01.650445" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.649361" elapsed="0.001084"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.650445" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.650445" elapsed="0.000000"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.650445" level="INFO">${ts_match} = ['2025-05-09T10:42:44.683683 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.650445" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.650445" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.650445" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.650445" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.650445" level="INFO">Length is 71.</msg>
+<msg time="2025-05-09T11:12:01.650445" level="INFO">${ts_len} = 71</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.650445" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.650445" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.650445" elapsed="0.001005"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.650445" elapsed="0.001005"/>
+</if>
+<var name="${line}">2025-05-09T10:42:44.683683 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: submit | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.649361" elapsed="0.002089"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.651450" elapsed="0.000000"/>
+</kw>
+<msg time="2025-05-09T11:12:01.651450" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.651450" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.651450" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.651450" elapsed="0.000000"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.651450" level="INFO">${ts_match} = ['2025-05-09T10:42:44.983317 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.651450" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.651450" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.651450" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.651450" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.652452" level="INFO">Length is 69.</msg>
+<msg time="2025-05-09T11:12:01.652452" level="INFO">${ts_len} = 69</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.651450" elapsed="0.001002"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.652452" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.651450" elapsed="0.001002"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.651450" elapsed="0.001002"/>
+</if>
+<var name="${line}">2025-05-09T10:42:44.983317 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: user | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.651450" elapsed="0.001002"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.653040" elapsed="0.000000"/>
+</kw>
+<msg time="2025-05-09T11:12:01.653040" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.652452" elapsed="0.000588"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.653040" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.653040" elapsed="0.000000"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.653040" level="INFO">${ts_match} = ['2025-05-09T10:42:45.297839 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.653040" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.653040" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.653040" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.653040" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.653040" level="INFO">Length is 70.</msg>
+<msg time="2025-05-09T11:12:01.654046" level="INFO">${ts_len} = 70</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.653040" elapsed="0.001006"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.654046" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.653040" elapsed="0.001006"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.653040" elapsed="0.001006"/>
+</if>
+<var name="${line}">2025-05-09T10:42:45.297839 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: token | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.652452" elapsed="0.001594"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.654046" elapsed="0.000000"/>
+</kw>
+<msg time="2025-05-09T11:12:01.654046" level="INFO">${is_failed} = True</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.654046" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.655055" level="INFO">${ip_match} = []</msg>
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.655055" elapsed="0.000000"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<msg time="2025-05-09T11:12:01.655055" level="INFO">${ts_match} = ['2025-05-09T10:42:45.689566 ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ...</msg>
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.655055" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.656057" level="INFO">Length is 0.</msg>
+<msg time="2025-05-09T11:12:01.656057" level="INFO">${ip_len} = 0</msg>
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.656057" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.656057" level="INFO">Length is 71.</msg>
+<msg time="2025-05-09T11:12:01.656057" level="INFO">${ts_len} = 71</msg>
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.656057" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.656057" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-05-09T11:12:01.654046" elapsed="0.002011"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.654046" elapsed="0.002011"/>
+</if>
+<var name="${line}">2025-05-09T10:42:45.689566 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: delete | SUCCESS: False</var>
+<status status="PASS" start="2025-05-09T11:12:01.654046" elapsed="0.003006"/>
+</iter>
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Contain" owner="BuiltIn">
+<msg time="2025-05-09T11:12:01.657052" level="FAIL">'2025-05-09T10:42:46.039240 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: secret | SUCCESS: True' does not contain 'SUCCESS: False'</msg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="FAIL" start="2025-05-09T11:12:01.657052" elapsed="0.000000">'2025-05-09T10:42:46.039240 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: secret | SUCCESS: True' does not contain 'SUCCESS: False'</status>
+</kw>
+<msg time="2025-05-09T11:12:01.657052" level="INFO">${is_failed} = False</msg>
+<var>${is_failed}</var>
+<arg>Should Contain</arg>
+<arg>${line}</arg>
+<arg>SUCCESS: False</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-05-09T11:12:01.657052" elapsed="0.000000"/>
+</kw>
+<if>
+<branch type="IF" condition="${is_failed}">
+<kw name="Get Regexp Matches" owner="String">
+<var>${ip_match}</var>
+<arg>${line}</arg>
+<arg>IP: (\S+)</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="NOT RUN" start="2025-05-09T11:12:01.657052" elapsed="0.000000"/>
+</kw>
+<kw name="Get Regexp Matches" owner="String">
+<var>${ts_match}</var>
+<arg>${line}</arg>
+<arg>^(.*?) \|</arg>
+<doc>Returns a list of all non-overlapping matches in the given string.</doc>
+<status status="NOT RUN" start="2025-05-09T11:12:01.658054" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<var>${ip_len}</var>
+<arg>${ip_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="NOT RUN" start="2025-05-09T11:12:01.658054" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<var>${ts_len}</var>
+<arg>${ts_match}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="NOT RUN" start="2025-05-09T11:12:01.658054" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${ip_len} &gt; 0 and ${ts_len} &gt; 0</arg>
+<arg>Store Failed Attempt</arg>
+<arg>${ip_match}</arg>
+<arg>${ts_match}</arg>
+<arg>${failed_ips}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" start="2025-05-09T11:12:01.658054" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2025-05-09T11:12:01.657052" elapsed="0.001002"/>
+</branch>
+<status status="PASS" start="2025-05-09T11:12:01.657052" elapsed="0.001002"/>
+</if>
+<var name="${line}">2025-05-09T10:42:46.039240 | IP: 127.0.0.1 | USERNAME: admin | PASSWORD: secret | SUCCESS: True</var>
+<status status="PASS" start="2025-05-09T11:12:01.657052" elapsed="0.001002"/>
+</iter>
+<var>${line}</var>
+<value>@{lines}</value>
+<status status="PASS" start="2025-05-09T11:12:01.625572" elapsed="0.032482"/>
+</for>
+<for flavor="IN">
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${times}</var>
+<arg>${failed_ips}</arg>
+<arg>${ip}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-05-09T11:12:01.659054" elapsed="0.000000"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<var>${count}</var>
+<arg>${times}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="NOT RUN" start="2025-05-09T11:12:01.659054" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>=== DEBUG: Count for IP ${ip} is ${count}, threshold is ${THRESHOLD}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-05-09T11:12:01.659054" elapsed="0.000000"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<var>${is_exceeded}</var>
+<arg>int(${count}) &gt; int(${THRESHOLD})</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-05-09T11:12:01.659054" elapsed="0.000000"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${is_exceeded}</arg>
+<arg>Log To Console</arg>
+<arg>ALERT: IP ${ip} failed ${count} times. Last at ${times[-1]}</arg>
+<arg>Should Be Equal As Strings</arg>
+<arg>FAIL_NOW</arg>
+<arg>PASS</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" start="2025-05-09T11:12:01.659054" elapsed="0.000000"/>
+</kw>
+<var name="${ip}"/>
+<status status="NOT RUN" start="2025-05-09T11:12:01.659054" elapsed="0.000000"/>
+</iter>
+<var>${ip}</var>
+<value>@{failed_ips.keys()}</value>
+<status status="NOT RUN" start="2025-05-09T11:12:01.658054" elapsed="0.001000"/>
+</for>
+<status status="PASS" start="2025-05-09T11:12:01.623681" elapsed="0.036350"/>
 </test>
-<test id="s1-t2" name="Login with user 'admin' and password 'action'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:04.538920" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:04.538920" elapsed="0.089720"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:04.538920" elapsed="0.089720"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:04.652513" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:04.651514" elapsed="0.074367"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:04.651514" elapsed="0.075370"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:04.727885" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:04.755333" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:04.727885" elapsed="0.056603"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:04.726884" elapsed="0.058731"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:04.786243" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:04.786243" elapsed="0.115862"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:04.785615" elapsed="0.117664"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:04.906715" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:04.903279" elapsed="0.003436"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:04.907715" level="FAIL">Login failed for user 'admin' with password 'action': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:04.906715" elapsed="0.001000">Login failed for user 'admin' with password 'action': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=action</arg>
-<status status="FAIL" start="2025-05-07T12:02:04.650520" elapsed="0.257195">Login failed for user 'admin' with password 'action': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:04.536283" elapsed="0.394559">Login failed for user 'admin' with password 'action': Login != Dashboard</status>
-</test>
-<test id="s1-t3" name="Login with user 'admin' and password 'page'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:04.942786" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:04.942786" elapsed="0.066241"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:04.941419" elapsed="0.067608"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:05.047959" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:05.046959" elapsed="0.070759"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:05.043960" elapsed="0.073758"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:05.119724" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:05.136829" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:05.118728" elapsed="0.136117"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:05.117718" elapsed="0.137127"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:05.256843" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:05.256843" elapsed="0.115109"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:05.255843" elapsed="0.116109"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:05.376219" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:05.371952" elapsed="0.004267"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:05.377220" level="FAIL">Login failed for user 'admin' with password 'page': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:05.377220" elapsed="0.000000">Login failed for user 'admin' with password 'page': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=page</arg>
-<status status="FAIL" start="2025-05-07T12:02:05.042947" elapsed="0.335274">Login failed for user 'admin' with password 'page': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:04.938420" elapsed="0.457189">Login failed for user 'admin' with password 'page': Login != Dashboard</status>
-</test>
-<test id="s1-t4" name="Login with user 'admin' and password 'name'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:05.412019" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:05.412019" elapsed="0.090352"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:05.410133" elapsed="0.093240"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:05.515912" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:05.515912" elapsed="0.095208"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:05.513915" elapsed="0.097205"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:05.613123" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:05.658422" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:05.612121" elapsed="0.070295"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:05.611120" elapsed="0.071296"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:05.686744" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:05.686744" elapsed="0.083722"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:05.682416" elapsed="0.088050"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:05.775204" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:05.770466" elapsed="0.004738"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:05.776559" level="FAIL">Login failed for user 'admin' with password 'name': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:05.775626" elapsed="0.000933">Login failed for user 'admin' with password 'name': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=name</arg>
-<status status="FAIL" start="2025-05-07T12:02:05.512914" elapsed="0.263645">Login failed for user 'admin' with password 'name': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:05.406831" elapsed="0.371164">Login failed for user 'admin' with password 'name': Login != Dashboard</status>
-</test>
-<test id="s1-t5" name="Login with user 'admin' and password 'password'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:05.792680" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:05.791283" elapsed="0.071510"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:05.791283" elapsed="0.071510"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:05.871321" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:05.870308" elapsed="0.070572"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:05.870308" elapsed="0.070572"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:05.940880" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:05.965519" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:05.940880" elapsed="0.044913"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:05.940880" elapsed="0.046301"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:05.988196" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:05.988196" elapsed="0.114549"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:05.987181" elapsed="0.116562"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.107744" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.103743" elapsed="0.004001"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:06.108903" level="FAIL">Login failed for user 'admin' with password 'password': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:06.108760" elapsed="0.000986">Login failed for user 'admin' with password 'password': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=password</arg>
-<status status="FAIL" start="2025-05-07T12:02:05.863792" elapsed="0.246486">Login failed for user 'admin' with password 'password': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:05.787203" elapsed="0.323075">Login failed for user 'admin' with password 'password': Login != Dashboard</status>
-</test>
-<test id="s1-t6" name="Login with user 'admin' and password 'url'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.115539" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.114541" elapsed="0.047948"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:06.114541" elapsed="0.047948"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.165921" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.164920" elapsed="0.059579"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:06.163909" elapsed="0.060590"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.226925" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:06.244063" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.225509" elapsed="0.033792"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:06.225509" elapsed="0.033792"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.260300" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.260300" elapsed="0.096269"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:06.259301" elapsed="0.097268"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.359569" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.356569" elapsed="0.004002"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:06.360571" level="FAIL">Login failed for user 'admin' with password 'url': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:06.360571" elapsed="0.001000">Login failed for user 'admin' with password 'url': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=url</arg>
-<status status="FAIL" start="2025-05-07T12:02:06.163909" elapsed="0.197662">Login failed for user 'admin' with password 'url': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:06.111529" elapsed="0.251163">Login failed for user 'admin' with password 'url': Login != Dashboard</status>
-</test>
-<test id="s1-t7" name="Login with user 'admin' and password 'email'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.368081" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.368081" elapsed="0.058355"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:06.366084" elapsed="0.060352"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.429432" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.428438" elapsed="0.077809"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:06.428438" elapsed="0.077809"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.507263" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:06.523362" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.507263" elapsed="0.034889"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:06.506247" elapsed="0.035905"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.543153" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.543153" elapsed="0.068827"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:06.542152" elapsed="0.069828"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.620041" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.611980" elapsed="0.008144"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:06.620266" level="FAIL">Login failed for user 'admin' with password 'email': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:06.620266" elapsed="0.001005">Login failed for user 'admin' with password 'email': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=email</arg>
-<status status="FAIL" start="2025-05-07T12:02:06.427433" elapsed="0.193838">Login failed for user 'admin' with password 'email': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:06.363702" elapsed="0.258569">Login failed for user 'admin' with password 'email': Login != Dashboard</status>
-</test>
-<test id="s1-t8" name="Login with user 'admin' and password 'type'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.625278" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.625278" elapsed="0.038988"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:06.625278" elapsed="0.038988"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.668694" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.668694" elapsed="0.039838"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:06.667695" elapsed="0.040837"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.711066" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:06.727896" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.710050" elapsed="0.030906"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:06.708532" elapsed="0.033424"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.742973" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.742973" elapsed="0.051283"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:06.741956" elapsed="0.052300"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.797265" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.794256" elapsed="0.003009"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:06.798268" level="FAIL">Login failed for user 'admin' with password 'type': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:06.797265" elapsed="0.001003">Login failed for user 'admin' with password 'type': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=type</arg>
-<status status="FAIL" start="2025-05-07T12:02:06.665278" elapsed="0.133987">Login failed for user 'admin' with password 'type': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:06.623271" elapsed="0.179736">Login failed for user 'admin' with password 'type': Login != Dashboard</status>
-</test>
-<test id="s1-t9" name="Login with user 'admin' and password 'username'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.806018" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.806018" elapsed="0.037591"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:06.805039" elapsed="0.039562"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.845601" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.845601" elapsed="0.048168"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:06.844601" elapsed="0.049168"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.895776" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:06.914437" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.894765" elapsed="0.033134"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:06.894765" elapsed="0.033134"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.928897" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.928897" elapsed="0.048124"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:06.927899" elapsed="0.049122"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.979022" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.977021" elapsed="0.002001"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:06.980239" level="FAIL">Login failed for user 'admin' with password 'username': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:06.979022" elapsed="0.001217">Login failed for user 'admin' with password 'username': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=username</arg>
-<status status="FAIL" start="2025-05-07T12:02:06.844601" elapsed="0.135638">Login failed for user 'admin' with password 'username': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:06.804038" elapsed="0.177711">Login failed for user 'admin' with password 'username': Login != Dashboard</status>
-</test>
-<test id="s1-t10" name="Login with user 'admin' and password 'file'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:06.985761" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:06.985761" elapsed="0.040362"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:06.984761" elapsed="0.041362"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.028135" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.028135" elapsed="0.045543"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:07.027132" elapsed="0.046546"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.075676" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:07.094828" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.075676" elapsed="0.031618"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:07.073678" elapsed="0.034616"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.109296" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.108294" elapsed="0.050179"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:07.108294" elapsed="0.050179"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.160668" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.158473" elapsed="0.002195"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:07.161667" level="FAIL">Login failed for user 'admin' with password 'file': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:07.161667" elapsed="0.000000">Login failed for user 'admin' with password 'file': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=file</arg>
-<status status="FAIL" start="2025-05-07T12:02:07.026123" elapsed="0.136560">Login failed for user 'admin' with password 'file': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:06.982759" elapsed="0.179924">Login failed for user 'admin' with password 'file': Login != Dashboard</status>
-</test>
-<test id="s1-t11" name="Login with user 'admin' and password 'title'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.167869" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.167869" elapsed="0.030822"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:07.166872" elapsed="0.032817"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.205689" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.205689" elapsed="0.048490"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:07.204690" elapsed="0.050488"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.256176" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:07.271772" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.256176" elapsed="0.025432"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:07.255178" elapsed="0.026430"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.283522" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.282508" elapsed="0.044376"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:07.282508" elapsed="0.045370"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.329874" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.327878" elapsed="0.001996"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:07.329874" level="FAIL">Login failed for user 'admin' with password 'title': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:07.329874" elapsed="0.001001">Login failed for user 'admin' with password 'title': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=title</arg>
-<status status="FAIL" start="2025-05-07T12:02:07.203689" elapsed="0.127186">Login failed for user 'admin' with password 'title': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:07.163668" elapsed="0.168490">Login failed for user 'admin' with password 'title': Login != Dashboard</status>
-</test>
-<test id="s1-t12" name="Login with user 'admin' and password 'code'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.338186" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.338186" elapsed="0.038710"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:07.337172" elapsed="0.039724"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.380136" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.380136" elapsed="0.045686"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:07.379123" elapsed="0.047711"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.427834" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:07.443712" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.427834" elapsed="0.029164"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:07.426834" elapsed="0.031174"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.458008" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.458008" elapsed="0.047085"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:07.458008" elapsed="0.047085"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.507612" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.505093" elapsed="0.002519"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:07.508612" level="FAIL">Login failed for user 'admin' with password 'code': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:07.508612" elapsed="0.000000">Login failed for user 'admin' with password 'code': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=code</arg>
-<status status="FAIL" start="2025-05-07T12:02:07.377882" elapsed="0.131734">Login failed for user 'admin' with password 'code': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:07.334168" elapsed="0.175448">Login failed for user 'admin' with password 'code': Login != Dashboard</status>
-</test>
-<test id="s1-t13" name="Login with user 'admin' and password 'q'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.515146" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.514153" elapsed="0.052899"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:07.513147" elapsed="0.054906"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.572053" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.571060" elapsed="0.057784"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:07.571060" elapsed="0.057784"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.630992" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:07.658014" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.629846" elapsed="0.044492"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:07.629846" elapsed="0.044492"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.675339" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.675339" elapsed="0.064666"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:07.674338" elapsed="0.065667"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.743709" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.740005" elapsed="0.003704"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:07.745051" level="FAIL">Login failed for user 'admin' with password 'q': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:07.743709" elapsed="0.001342">Login failed for user 'admin' with password 'q': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=q</arg>
-<status status="FAIL" start="2025-05-07T12:02:07.570056" elapsed="0.176010">Login failed for user 'admin' with password 'q': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:07.511130" elapsed="0.235946">Login failed for user 'admin' with password 'q': Login != Dashboard</status>
-</test>
-<test id="s1-t14" name="Login with user 'admin' and password 'submit'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.755639" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.754648" elapsed="0.040825"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:07.754648" elapsed="0.040825"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.797486" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.797486" elapsed="0.063245"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:07.796476" elapsed="0.064577"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.862335" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:07.886404" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.861053" elapsed="0.044648"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:07.861053" elapsed="0.045645"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.907699" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.907699" elapsed="0.065351"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:07.906698" elapsed="0.066352"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.977445" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.973050" elapsed="0.004395"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:07.978455" level="FAIL">Login failed for user 'admin' with password 'submit': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:07.977445" elapsed="0.001010">Login failed for user 'admin' with password 'submit': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=submit</arg>
-<status status="FAIL" start="2025-05-07T12:02:07.796476" elapsed="0.181979">Login failed for user 'admin' with password 'submit': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:07.748264" elapsed="0.231595">Login failed for user 'admin' with password 'submit': Login != Dashboard</status>
-</test>
-<test id="s1-t15" name="Login with user 'admin' and password 'user'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:07.985590" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:07.985590" elapsed="0.046173"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:07.985590" elapsed="0.046173"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.042830" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.042830" elapsed="0.063238"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:08.041819" elapsed="0.064249"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.107182" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:08.126925" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.107182" elapsed="0.035963"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:08.106068" elapsed="0.037077"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.145139" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.145139" elapsed="0.097647"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:08.144138" elapsed="0.099661"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.246798" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.243799" elapsed="0.002999"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:08.247803" level="FAIL">Login failed for user 'admin' with password 'user': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:08.246798" elapsed="0.001005">Login failed for user 'admin' with password 'user': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=user</arg>
-<status status="FAIL" start="2025-05-07T12:02:08.041819" elapsed="0.205984">Login failed for user 'admin' with password 'user': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:07.982200" elapsed="0.282568">Login failed for user 'admin' with password 'user': Login != Dashboard</status>
-</test>
-<test id="s1-t16" name="Login with user 'admin' and password 'token'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.279770" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.278773" elapsed="0.063851"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:08.277781" elapsed="0.064843"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.346624" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.346624" elapsed="0.065341"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:08.345625" elapsed="0.067349"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.413984" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:08.455273" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.413984" elapsed="0.057467"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:08.412974" elapsed="0.058477"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.473450" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.472454" elapsed="0.070596"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:08.471451" elapsed="0.071599"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.547043" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.543050" elapsed="0.003993"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:08.548058" level="FAIL">Login failed for user 'admin' with password 'token': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:08.548058" elapsed="0.003995">Login failed for user 'admin' with password 'token': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=token</arg>
-<status status="FAIL" start="2025-05-07T12:02:08.343624" elapsed="0.208429">Login failed for user 'admin' with password 'token': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:08.271770" elapsed="0.283576">Login failed for user 'admin' with password 'token': Login != Dashboard</status>
-</test>
-<test id="s1-t17" name="Login with user 'admin' and password 'delete'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.559944" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.559944" elapsed="0.044699"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:08.558946" elapsed="0.045697"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.606642" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.606642" elapsed="0.055799"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:08.605642" elapsed="0.057798"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.664440" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:08.688418" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.664440" elapsed="0.039326"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:08.663440" elapsed="0.040326"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.704760" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.704760" elapsed="0.051558"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:08.704760" elapsed="0.051558"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.758317" level="INFO">${title} = Login</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.756318" elapsed="0.001999"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<msg time="2025-05-07T12:02:08.759536" level="FAIL">Login failed for user 'admin' with password 'delete': Login != Dashboard</msg>
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="FAIL" start="2025-05-07T12:02:08.758317" elapsed="0.001219">Login failed for user 'admin' with password 'delete': Login != Dashboard</status>
-</kw>
-<arg>username=admin</arg>
-<arg>password=delete</arg>
-<status status="FAIL" start="2025-05-07T12:02:08.605642" elapsed="0.153894">Login failed for user 'admin' with password 'delete': Login != Dashboard</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:08.556711" elapsed="0.202825">Login failed for user 'admin' with password 'delete': Login != Dashboard</status>
-</test>
-<test id="s1-t18" name="Login with user 'admin' and password 'secret'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.763546" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.763546" elapsed="0.036662"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:08.762546" elapsed="0.037662"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.804793" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.804793" elapsed="0.048522"/>
-</kw>
-<arg>${username}</arg>
-<status status="PASS" start="2025-05-07T12:02:08.802208" elapsed="0.052088"/>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<kw name="Input Password" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.855296" level="INFO">Typing password into text field 'id=Password'.</msg>
-<msg time="2025-05-07T12:02:08.872466" level="INFO">Temporally setting log level to: NONE</msg>
-<arg>id=Password</arg>
-<arg>${password}</arg>
-<doc>Types the given password into the text field identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.855296" elapsed="0.029526"/>
-</kw>
-<arg>${password}</arg>
-<status status="PASS" start="2025-05-07T12:02:08.854296" elapsed="0.030526"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<kw name="Click Button" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.887200" level="INFO">Clicking button 'id=Login'.</msg>
-<arg>id=Login</arg>
-<doc>Clicks the button identified by ``locator``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.885817" elapsed="0.089203"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:08.885817" elapsed="0.089203"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.978020" level="INFO">${title} = Dashboard</msg>
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.975020" elapsed="0.003000"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.978020" elapsed="0.000999"/>
-</kw>
-<arg>username=admin</arg>
-<arg>password=secret</arg>
-<status status="PASS" start="2025-05-07T12:02:08.802208" elapsed="0.176811"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:08.760542" elapsed="0.218477"/>
-</test>
-<test id="s1-t19" name="Login with user 'admin' and password 'message'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:08.983287" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:08.983287" elapsed="0.050305"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:08.983287" elapsed="0.051522"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.037826" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<msg time="2025-05-07T12:02:09.067788" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-05-07T12:02:09.067788" level="FAIL">Element with locator 'id=Username' not found.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="FAIL" start="2025-05-07T12:02:09.036822" elapsed="0.035953">Element with locator 'id=Username' not found.</status>
-</kw>
-<arg>${username}</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.036822" elapsed="0.035953">Element with locator 'id=Username' not found.</status>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<arg>${password}</arg>
-<status status="NOT RUN" start="2025-05-07T12:02:09.073783" elapsed="0.000000"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<status status="NOT RUN" start="2025-05-07T12:02:09.073783" elapsed="0.000000"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.073783" elapsed="0.000000"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.073783" elapsed="0.000000"/>
-</kw>
-<arg>username=admin</arg>
-<arg>password=message</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.035822" elapsed="0.037961">Element with locator 'id=Username' not found.</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:08.980207" elapsed="0.094586">Element with locator 'id=Username' not found.</status>
-</test>
-<test id="s1-t20" name="Login with user 'admin' and password 't'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.078795" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:09.077793" elapsed="0.048714"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:09.077793" elapsed="0.048714"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.128609" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<msg time="2025-05-07T12:02:09.162021" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-05-07T12:02:09.162021" level="FAIL">Element with locator 'id=Username' not found.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="FAIL" start="2025-05-07T12:02:09.128609" elapsed="0.034438">Element with locator 'id=Username' not found.</status>
-</kw>
-<arg>${username}</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.127512" elapsed="0.036526">Element with locator 'id=Username' not found.</status>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<arg>${password}</arg>
-<status status="NOT RUN" start="2025-05-07T12:02:09.164038" elapsed="0.000000"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<status status="NOT RUN" start="2025-05-07T12:02:09.164038" elapsed="0.000000"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.164038" elapsed="0.001000"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.165038" elapsed="0.000000"/>
-</kw>
-<arg>username=admin</arg>
-<arg>password=t</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.127512" elapsed="0.037526">Element with locator 'id=Username' not found.</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:09.075797" elapsed="0.090226">Element with locator 'id=Username' not found.</status>
-</test>
-<test id="s1-t21" name="Login with user 'admin' and password 'c'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.173166" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:09.173166" elapsed="0.034299"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:09.172164" elapsed="0.035301"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.210462" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<msg time="2025-05-07T12:02:09.257463" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-3.png"&gt;&lt;img src="selenium-screenshot-3.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-05-07T12:02:09.257463" level="FAIL">Element with locator 'id=Username' not found.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="FAIL" start="2025-05-07T12:02:09.210462" elapsed="0.051155">Element with locator 'id=Username' not found.</status>
-</kw>
-<arg>${username}</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.209461" elapsed="0.053163">Element with locator 'id=Username' not found.</status>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<arg>${password}</arg>
-<status status="NOT RUN" start="2025-05-07T12:02:09.262624" elapsed="0.000000"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<status status="NOT RUN" start="2025-05-07T12:02:09.263635" elapsed="0.000000"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.263635" elapsed="0.000000"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.264151" elapsed="0.000000"/>
-</kw>
-<arg>username=admin</arg>
-<arg>password=c</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.208464" elapsed="0.055687">Element with locator 'id=Username' not found.</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:09.170591" elapsed="0.094570">Element with locator 'id=Username' not found.</status>
-</test>
-<test id="s1-t22" name="Login with user 'admin' and password 'data'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.271162" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:09.271162" elapsed="0.042967"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:09.271162" elapsed="0.042967"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.317128" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<msg time="2025-05-07T12:02:09.354145" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-4.png"&gt;&lt;img src="selenium-screenshot-4.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-05-07T12:02:09.354145" level="FAIL">Element with locator 'id=Username' not found.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="FAIL" start="2025-05-07T12:02:09.316128" elapsed="0.039854">Element with locator 'id=Username' not found.</status>
-</kw>
-<arg>${username}</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.315127" elapsed="0.040855">Element with locator 'id=Username' not found.</status>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<arg>${password}</arg>
-<status status="NOT RUN" start="2025-05-07T12:02:09.356998" elapsed="0.000000"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<status status="NOT RUN" start="2025-05-07T12:02:09.356998" elapsed="0.000000"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.356998" elapsed="0.000000"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.356998" elapsed="0.000000"/>
-</kw>
-<arg>username=admin</arg>
-<arg>password=data</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.315127" elapsed="0.042859">Element with locator 'id=Username' not found.</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:09.266161" elapsed="0.092824">Element with locator 'id=Username' not found.</status>
-</test>
-<test id="s1-t23" name="Login with user 'admin' and password 'mode'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.363004" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:09.363004" elapsed="0.082482"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:09.361983" elapsed="0.084590"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.473706" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<msg time="2025-05-07T12:02:09.514886" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-5.png"&gt;&lt;img src="selenium-screenshot-5.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-05-07T12:02:09.515905" level="FAIL">Element with locator 'id=Username' not found.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="FAIL" start="2025-05-07T12:02:09.473706" elapsed="0.043459">Element with locator 'id=Username' not found.</status>
-</kw>
-<arg>${username}</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.472704" elapsed="0.045476">Element with locator 'id=Username' not found.</status>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<arg>${password}</arg>
-<status status="NOT RUN" start="2025-05-07T12:02:09.518180" elapsed="0.000000"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<status status="NOT RUN" start="2025-05-07T12:02:09.519196" elapsed="0.000000"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.519196" elapsed="0.000000"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.519196" elapsed="0.000000"/>
-</kw>
-<arg>username=admin</arg>
-<arg>password=mode</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.471707" elapsed="0.048503">Element with locator 'id=Username' not found.</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:09.359983" elapsed="0.160227">Element with locator 'id=Username' not found.</status>
-</test>
-<test id="s1-t24" name="Login with user 'admin' and password 'order'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.525577" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:09.525577" elapsed="0.057244"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:09.524555" elapsed="0.058266"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.591251" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<msg time="2025-05-07T12:02:09.627040" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-6.png"&gt;&lt;img src="selenium-screenshot-6.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-05-07T12:02:09.628043" level="FAIL">Element with locator 'id=Username' not found.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="FAIL" start="2025-05-07T12:02:09.590607" elapsed="0.038937">Element with locator 'id=Username' not found.</status>
-</kw>
-<arg>${username}</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.589196" elapsed="0.040348">Element with locator 'id=Username' not found.</status>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<arg>${password}</arg>
-<status status="NOT RUN" start="2025-05-07T12:02:09.630171" elapsed="0.000000"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<status status="NOT RUN" start="2025-05-07T12:02:09.630171" elapsed="0.000000"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.630171" elapsed="0.000000"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.630171" elapsed="0.000000"/>
-</kw>
-<arg>username=admin</arg>
-<arg>password=order</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.589196" elapsed="0.040975">Element with locator 'id=Username' not found.</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:09.522205" elapsed="0.109085">Element with locator 'id=Username' not found.</status>
-</test>
-<test id="s1-t25" name="Login with user 'admin' and password 'lang'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.657279" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:09.656276" elapsed="0.043032"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:09.655276" elapsed="0.044442"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.712432" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<msg time="2025-05-07T12:02:09.746536" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-7.png"&gt;&lt;img src="selenium-screenshot-7.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-05-07T12:02:09.746536" level="FAIL">Element with locator 'id=Username' not found.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="FAIL" start="2025-05-07T12:02:09.712432" elapsed="0.036093">Element with locator 'id=Username' not found.</status>
-</kw>
-<arg>${username}</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.710920" elapsed="0.037605">Element with locator 'id=Username' not found.</status>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<arg>${password}</arg>
-<status status="NOT RUN" start="2025-05-07T12:02:09.748525" elapsed="0.000000"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<status status="NOT RUN" start="2025-05-07T12:02:09.749692" elapsed="0.000000"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.751868" elapsed="0.000000"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.751868" elapsed="0.001000"/>
-</kw>
-<arg>username=admin</arg>
-<arg>password=lang</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.710920" elapsed="0.041948">Element with locator 'id=Username' not found.</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:09.648836" elapsed="0.105133">Element with locator 'id=Username' not found.</status>
-</test>
-<test id="s1-t26" name="Login with user 'admin' and password 'p'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.758485" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:09.758485" elapsed="0.051519"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:09.757474" elapsed="0.052530"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.814686" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<msg time="2025-05-07T12:02:09.859575" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-8.png"&gt;&lt;img src="selenium-screenshot-8.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-05-07T12:02:09.859575" level="FAIL">Element with locator 'id=Username' not found.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="FAIL" start="2025-05-07T12:02:09.814686" elapsed="0.046959">Element with locator 'id=Username' not found.</status>
-</kw>
-<arg>${username}</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.813668" elapsed="0.048970">Element with locator 'id=Username' not found.</status>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<arg>${password}</arg>
-<status status="NOT RUN" start="2025-05-07T12:02:09.862638" elapsed="0.000000"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<status status="NOT RUN" start="2025-05-07T12:02:09.863636" elapsed="0.000000"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.863636" elapsed="0.000000"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.863636" elapsed="0.000000"/>
-</kw>
-<arg>username=admin</arg>
-<arg>password=p</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.812564" elapsed="0.051072">Element with locator 'id=Username' not found.</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:09.755485" elapsed="0.109152">Element with locator 'id=Username' not found.</status>
-</test>
-<test id="s1-t27" name="Login with user 'admin' and password 'key'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.868637" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:09.868637" elapsed="0.043883"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:09.867635" elapsed="0.044885"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.914815" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<msg time="2025-05-07T12:02:09.958489" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-9.png"&gt;&lt;img src="selenium-screenshot-9.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-05-07T12:02:09.958489" level="FAIL">Element with locator 'id=Username' not found.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="FAIL" start="2025-05-07T12:02:09.914815" elapsed="0.045671">Element with locator 'id=Username' not found.</status>
-</kw>
-<arg>${username}</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.913799" elapsed="0.047685">Element with locator 'id=Username' not found.</status>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<arg>${password}</arg>
-<status status="NOT RUN" start="2025-05-07T12:02:09.962095" elapsed="0.000146"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<status status="NOT RUN" start="2025-05-07T12:02:09.962241" elapsed="0.000000"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.962241" elapsed="0.000000"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:09.963255" elapsed="0.000000"/>
-</kw>
-<arg>username=admin</arg>
-<arg>password=key</arg>
-<status status="FAIL" start="2025-05-07T12:02:09.913799" elapsed="0.049456">Element with locator 'id=Username' not found.</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:09.865637" elapsed="0.098621">Element with locator 'id=Username' not found.</status>
-</test>
-<test id="s1-t28" name="Login with user 'admin' and password 'status'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:09.970790" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:09.968655" elapsed="0.046915"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:09.966256" elapsed="0.049314"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:10.023583" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<msg time="2025-05-07T12:02:10.060726" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-10.png"&gt;&lt;img src="selenium-screenshot-10.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-05-07T12:02:10.060726" level="FAIL">Element with locator 'id=Username' not found.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="FAIL" start="2025-05-07T12:02:10.023583" elapsed="0.038158">Element with locator 'id=Username' not found.</status>
-</kw>
-<arg>${username}</arg>
-<status status="FAIL" start="2025-05-07T12:02:10.022583" elapsed="0.040177">Element with locator 'id=Username' not found.</status>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<arg>${password}</arg>
-<status status="NOT RUN" start="2025-05-07T12:02:10.062760" elapsed="0.000000"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<status status="NOT RUN" start="2025-05-07T12:02:10.062760" elapsed="0.000000"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:10.062760" elapsed="0.000000"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:10.063759" elapsed="0.000000"/>
-</kw>
-<arg>username=admin</arg>
-<arg>password=status</arg>
-<status status="FAIL" start="2025-05-07T12:02:10.016571" elapsed="0.047188">Element with locator 'id=Username' not found.</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:09.965258" elapsed="0.099500">Element with locator 'id=Username' not found.</status>
-</test>
-<test id="s1-t29" name="Login with user 'admin' and password 'start'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:10.068077" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:10.068077" elapsed="0.047637"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:10.066757" elapsed="0.048957"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:10.117762" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<msg time="2025-05-07T12:02:10.162286" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-11.png"&gt;&lt;img src="selenium-screenshot-11.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-05-07T12:02:10.163287" level="FAIL">Element with locator 'id=Username' not found.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="FAIL" start="2025-05-07T12:02:10.117762" elapsed="0.047520">Element with locator 'id=Username' not found.</status>
-</kw>
-<arg>${username}</arg>
-<status status="FAIL" start="2025-05-07T12:02:10.117762" elapsed="0.048521">Element with locator 'id=Username' not found.</status>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<arg>${password}</arg>
-<status status="NOT RUN" start="2025-05-07T12:02:10.166283" elapsed="0.001410"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<status status="NOT RUN" start="2025-05-07T12:02:10.170159" elapsed="0.000000"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:10.170159" elapsed="0.000000"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:10.170159" elapsed="0.000000"/>
-</kw>
-<arg>username=admin</arg>
-<arg>password=start</arg>
-<status status="FAIL" start="2025-05-07T12:02:10.116724" elapsed="0.054441">Element with locator 'id=Username' not found.</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:10.065755" elapsed="0.105916">Element with locator 'id=Username' not found.</status>
-</test>
-<test id="s1-t30" name="Login with user 'admin' and password 'charset'" line="12">
-<kw name="Open Login Page" owner="login_resources" type="SETUP">
-<kw name="Go To" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:10.174704" level="INFO">Opening url 'http://127.0.0.1:5000'</msg>
-<arg>${LOGIN URL}</arg>
-<doc>Navigates the current browser window to the provided ``url``.</doc>
-<status status="PASS" start="2025-05-07T12:02:10.174704" elapsed="0.036766"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:10.174704" elapsed="0.037767"/>
-</kw>
-<kw name="Valid Login Should Succeed">
-<kw name="Input username" owner="login_resources">
-<kw name="Input Text" owner="SeleniumLibrary">
-<msg time="2025-05-07T12:02:10.214815" level="INFO">Typing text 'admin' into text field 'id=Username'.</msg>
-<msg time="2025-05-07T12:02:10.256721" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-12.png"&gt;&lt;img src="selenium-screenshot-12.png" width="800px"&gt;&lt;/a&gt;</msg>
-<msg time="2025-05-07T12:02:10.256721" level="FAIL">Element with locator 'id=Username' not found.</msg>
-<arg>id=Username</arg>
-<arg>${username}</arg>
-<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
-<status status="FAIL" start="2025-05-07T12:02:10.213786" elapsed="0.045315">Element with locator 'id=Username' not found.</status>
-</kw>
-<arg>${username}</arg>
-<status status="FAIL" start="2025-05-07T12:02:10.212471" elapsed="0.046630">Element with locator 'id=Username' not found.</status>
-</kw>
-<kw name="Input pwd" owner="login_resources">
-<arg>${password}</arg>
-<status status="NOT RUN" start="2025-05-07T12:02:10.260346" elapsed="0.000137"/>
-</kw>
-<kw name="click login button" owner="login_resources">
-<status status="NOT RUN" start="2025-05-07T12:02:10.260483" elapsed="0.000000"/>
-</kw>
-<kw name="Get Title" owner="SeleniumLibrary">
-<var>${title}</var>
-<doc>Returns the title of the current page.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:10.260483" elapsed="0.000000"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${title}</arg>
-<arg>Dashboard</arg>
-<arg>Login failed for user '${username}' with password '${password}'</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="NOT RUN" start="2025-05-07T12:02:10.260483" elapsed="0.000000"/>
-</kw>
-<arg>username=admin</arg>
-<arg>password=charset</arg>
-<status status="FAIL" start="2025-05-07T12:02:10.212471" elapsed="0.049126">Element with locator 'id=Username' not found.</status>
-</kw>
-<status status="FAIL" start="2025-05-07T12:02:10.172680" elapsed="0.088917">Element with locator 'id=Username' not found.</status>
-</test>
-<kw name="Close Browsers" owner="login_resources" type="TEARDOWN">
-<kw name="Close All Browsers" owner="SeleniumLibrary">
-<doc>Closes all open browsers and resets the browser cache.</doc>
-<status status="PASS" start="2025-05-07T12:02:10.264135" elapsed="1.361434"/>
-</kw>
-<status status="PASS" start="2025-05-07T12:02:10.264135" elapsed="1.361434"/>
-</kw>
-<status status="FAIL" start="2025-05-07T12:01:52.183836" elapsed="19.441733"/>
+<status status="PASS" start="2025-05-09T11:12:01.586737" elapsed="0.074145"/>
 </suite>
 <statistics>
 <total>
-<stat pass="1" fail="29" skip="0">All Tests</stat>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat name="DataDriven" id="s1" pass="1" fail="29" skip="0">DataDriven</stat>
+<stat name="BruteForce" id="s1" pass="1" fail="0" skip="0">BruteForce</stat>
 </suite>
 </statistics>
 <errors>

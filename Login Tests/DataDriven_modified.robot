@@ -27,6 +27,7 @@ Valid Login Should Succeed
 
     IF    '${title}' == 'Dashboard'
         Log To Console     Login successful with username: ${username} and password: ${password}
+        Element Should Be Visible    id=Logout
         Set Global Variable    ${LOGIN_SUCCESS}    True
         Should Be Equal    ${title}    Dashboard
     ELSE

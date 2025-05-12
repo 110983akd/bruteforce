@@ -10,7 +10,8 @@ VALID_PASSWORD = "secret"
 
 def log_attempt(username, password, success):
     timestamp = datetime.now().isoformat()
-    log_entry = f"{timestamp} | USERNAME: {username} | PASSWORD: {password} | SUCCESS: {success}\n"
+    ip_address = request.remote_addr
+    log_entry = f"{timestamp} | IP: {ip_address} | USERNAME: {username} | PASSWORD: {password} | SUCCESS: {success}\n"
     with open(LOG_FILE, "a") as f:
         f.write(log_entry)
 

@@ -1,11 +1,11 @@
 *** Settings ***
-Library     SeleniumLibrary    screenshot_on_failure=${False}
+Library     SeleniumLibrary 
 
 
 *** Variables ***
 ${LOGIN URL}    http://127.0.0.1:5000
 ${BROWSER}      firefox
-
+${LOGIN_SUCCESS}    False
 
 *** Keywords ***
 Open my Browser

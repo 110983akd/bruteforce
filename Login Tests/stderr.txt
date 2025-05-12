@@ -1,0 +1,3 @@
+[ ERROR ] option --output output.xml not recognized
+
+Try --help for usage information.
